@@ -1,4 +1,6 @@
-export const en = {
+import { Translations } from '../types';
+
+export const en: Translations = {
   // Common
   common: {
     bookNow: 'Book Now',
@@ -98,4 +100,4 @@ export const en = {
     workingHours: 'Working Hours',
     byAppointment: 'By appointment only',
   },
-} as const;
+};

@@ -1,4 +1,6 @@
-export const lt = {
+import { Translations } from '../types';
+
+export const lt: Translations = {
   // Common
   common: {
     bookNow: 'Užsisakyti laiką',
@@ -98,4 +100,4 @@ export const lt = {
     workingHours: 'Darbo laikas',
     byAppointment: 'Pagal išankstinę registraciją',
   },
-} as const;
+};
