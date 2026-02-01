@@ -1,5 +1,6 @@
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
+import AboutSection from './components/AboutSection';
 import GallerySection from './components/GallerySection';
 import PricingSection from './components/PricingSection';
 import ReviewsSection from './components/ReviewsSection';
@@ -12,6 +13,7 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
+        <AboutSection />
         <GallerySection />
         <PricingSection />
         <ReviewsSection />

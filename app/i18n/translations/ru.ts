@@ -1,6 +1,15 @@
 import { Translations } from '../types';
 
 export const ru: Translations = {
+  // Navigation
+  nav: {
+    about: 'Обо мне',
+    gallery: 'Галерея',
+    pricing: 'Цены',
+    reviews: 'Отзывы',
+    booking: 'Записаться',
+  },
+
   // Common
   common: {
     bookNow: 'Записаться',
@@ -99,5 +108,24 @@ export const ru: Translations = {
     rights: 'Все права защищены',
     workingHours: 'Часы работы',
     byAppointment: 'По предварительной записи',
+  },
+
+  // About Section
+  about: {
+    title: 'Обо мне',
+    subtitle: 'Ваш партнёр по красоте',
+    description:
+      'Я сертифицированный специалист по моментальному загару с любовью к идеальному оттенку кожи. Использую только продукты высшего качества для достижения натурального и стойкого результата для каждой клиентки.',
+    experience: 'Опыт',
+    experienceYears: '5+ лет',
+    clients: 'Довольные клиенты',
+    clientsCount: '500+',
+    certifications: 'Сертификаты',
+    certificationsCount: 'Профессиональные',
+    qualities: {
+      professional: 'Профессионализм',
+      individual: 'Индивидуальный подход',
+      quality: 'Качество',
+    },
   },
 };

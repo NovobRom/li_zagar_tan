@@ -1,6 +1,15 @@
 import { Translations } from '../types';
 
 export const en: Translations = {
+  // Navigation
+  nav: {
+    about: 'About Me',
+    gallery: 'Gallery',
+    pricing: 'Pricing',
+    reviews: 'Reviews',
+    booking: 'Book Now',
+  },
+
   // Common
   common: {
     bookNow: 'Book Now',
@@ -99,5 +108,24 @@ export const en: Translations = {
     rights: 'All rights reserved',
     workingHours: 'Working Hours',
     byAppointment: 'By appointment only',
+  },
+
+  // About Section
+  about: {
+    title: 'About Me',
+    subtitle: 'Your beauty partner',
+    description:
+      'I am a certified spray tan specialist with a passion for the perfect skin tone. I use only the highest quality products to ensure natural and long-lasting results for every client.',
+    experience: 'Experience',
+    experienceYears: '5+ years',
+    clients: 'Happy clients',
+    clientsCount: '500+',
+    certifications: 'Certifications',
+    certificationsCount: 'Professional',
+    qualities: {
+      professional: 'Professionalism',
+      individual: 'Individual approach',
+      quality: 'Quality',
+    },
   },
 };

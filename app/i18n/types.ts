@@ -12,6 +12,13 @@ export interface ServiceTranslation {
 }
 
 export interface Translations {
+  nav: {
+    about: string;
+    gallery: string;
+    pricing: string;
+    reviews: string;
+    booking: string;
+  };
   common: {
     bookNow: string;
     learnMore: string;
@@ -66,5 +73,21 @@ export interface Translations {
     rights: string;
     workingHours: string;
     byAppointment: string;
+  };
+  about: {
+    title: string;
+    subtitle: string;
+    description: string;
+    experience: string;
+    experienceYears: string;
+    clients: string;
+    clientsCount: string;
+    certifications: string;
+    certificationsCount: string;
+    qualities: {
+      professional: string;
+      individual: string;
+      quality: string;
+    };
   };
 }

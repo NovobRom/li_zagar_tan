@@ -1,6 +1,15 @@
 import { Translations } from '../types';
 
 export const lt: Translations = {
+  // Navigation
+  nav: {
+    about: 'Apie mane',
+    gallery: 'Galerija',
+    pricing: 'Kainos',
+    reviews: 'Atsiliepimai',
+    booking: 'Registracija',
+  },
+
   // Common
   common: {
     bookNow: 'Užsisakyti laiką',
@@ -99,5 +108,24 @@ export const lt: Translations = {
     rights: 'Visos teisės saugomos',
     workingHours: 'Darbo laikas',
     byAppointment: 'Pagal išankstinę registraciją',
+  },
+
+  // About Section
+  about: {
+    title: 'Apie mane',
+    subtitle: 'Jūsų grožio partnerė',
+    description:
+      'Esu sertifikuota purškiamo įdegio specialistė su aistra tobulam odos atspalviui. Naudoju tik aukščiausios kokybės produktus, kad užtikrinčiau natūralų ir ilgalaikį rezultatą kiekvienai klientei.',
+    experience: 'Patirtis',
+    experienceYears: '5+ metų',
+    clients: 'Patenkinti klientai',
+    clientsCount: '500+',
+    certifications: 'Sertifikatai',
+    certificationsCount: 'Profesionalūs',
+    qualities: {
+      professional: 'Profesionalumas',
+      individual: 'Individualus požiūris',
+      quality: 'Kokybė',
+    },
   },
 };

@@ -13,7 +13,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 pt-16 sm:pt-20">
+    <section id="hero" className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 pt-16 sm:pt-20">
       <div className="py-6 sm:py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
