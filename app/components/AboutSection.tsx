@@ -44,7 +44,7 @@ export default function AboutSection() {
           <div className="order-2 lg:order-2 space-y-6">
             {/* Header */}
             <div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-600 via-[#fbbf5d] to-orange-600 bg-clip-text text-transparent mb-2">
                 {t.about.title}
               </h2>
               <p className="text-lg sm:text-xl text-gray-700 font-medium">
@@ -53,7 +53,7 @@ export default function AboutSection() {
             </div>
 
             {/* Description */}
-            <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
+            <p className="text-[#333333] leading-relaxed text-base sm:text-lg">
               {t.about.description}
             </p>
 
@@ -64,7 +64,7 @@ export default function AboutSection() {
                   key={index}
                   className="text-center p-3 sm:p-4 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl sm:rounded-2xl"
                 >
-                  <div className="text-xl sm:text-2xl font-bold text-amber-600">
+                  <div className="text-xl sm:text-2xl font-bold text-[#fbbf5d]">
                     {stat.value}
                   </div>
                   <div className="text-xs sm:text-sm text-gray-600 mt-1">
@@ -83,7 +83,7 @@ export default function AboutSection() {
                     key={index}
                     className="flex items-center gap-2 px-4 py-2 bg-white border border-amber-200 rounded-full shadow-sm"
                   >
-                    <Icon className="w-4 h-4 text-amber-500" />
+                    <Icon className="w-4 h-4 text-[#fbbf5d]" />
                     <span className="text-sm font-medium text-gray-700">
                       {quality.text}
                     </span>
@@ -96,7 +96,7 @@ export default function AboutSection() {
             <div className="pt-2">
               <a
                 href="#booking"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-full shadow-lg hover:from-amber-600 hover:to-orange-600 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 via-[#fbbf5d] to-orange-500 text-white font-semibold rounded-full shadow-lg hover:from-amber-600 hover:to-orange-600 transition-all"
               >
                 {t.common.bookNow}
                 <svg

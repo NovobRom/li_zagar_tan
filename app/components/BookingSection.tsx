@@ -8,14 +8,14 @@ export default function BookingSection() {
   const { t } = useLanguage();
 
   return (
-    <section id="booking" className="py-12 sm:py-20 bg-gradient-to-br from-amber-500 via-orange-500 to-amber-600">
+    <section id="booking" className="py-12 sm:py-20 bg-gradient-to-br from-amber-600 via-[#fbbf5d] to-orange-600">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8">
           {/* Decorative Icon */}
           <div className="mb-6">
             <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-white/20 rounded-full backdrop-blur-sm">
-              <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
+              <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 text-[#fbbf5d]" />
             </div>
           </div>
 

@@ -11,17 +11,17 @@ export default function ReviewsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-3">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-600 via-[#fbbf5d] to-orange-600 bg-clip-text text-transparent mb-3">
             {t.reviews.title}
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[#333333] max-w-2xl mx-auto">
             {t.reviews.subtitle}
           </p>
           {/* Overall Rating */}
           <div className="mt-3 flex items-center justify-center gap-2">
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 sm:w-6 sm:h-6 fill-amber-400 text-amber-400" />
+                <Star key={i} className="w-5 h-5 sm:w-6 sm:h-6 fill-[#fbbf5d] text-[#fbbf5d]" />
               ))}
             </div>
             <span className="text-sm sm:text-base font-semibold text-gray-700">
@@ -40,12 +40,12 @@ export default function ReviewsSection() {
               {/* Stars */}
               <div className="flex gap-0.5 mb-3">
                 {[...Array(review.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-amber-400 text-amber-400" />
+                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-[#fbbf5d] text-[#fbbf5d]" />
                 ))}
               </div>
 
               {/* Review Text */}
-              <p className="text-gray-700 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base line-clamp-4 sm:line-clamp-none">
+              <p className="text-[#333333] mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base line-clamp-4 sm:line-clamp-none">
                 &ldquo;{review.text}&rdquo;
               </p>
 
