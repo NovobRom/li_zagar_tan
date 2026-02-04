@@ -2,8 +2,9 @@
 
 import { Sparkles, Clock, Shield } from 'lucide-react';
 import { useLanguage } from '@/app/context/LanguageContext';
+import Image from 'next/image';
 
-export default function HeroSection() {
+export default function HeroSection({ heroImageUrl }: { heroImageUrl: string | null }) {
   const { t } = useLanguage();
 
   const features = [
@@ -20,10 +21,20 @@ export default function HeroSection() {
 
             {/* Image - First on mobile */}
             <div className="relative w-full lg:order-last">
-              <div className="aspect-[4/3] sm:aspect-[3/4] bg-gradient-to-br from-amber-200 to-orange-300 rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden max-w-md mx-auto lg:max-w-none">
-                <div className="w-full h-full flex items-center justify-center text-white/50 text-base font-medium">
-                  {t.gallery.beforeAfter}
-                </div>
+              <div className="aspect-[4/3] sm:aspect-[3/4] bg-gradient-to-br from-amber-200 to-orange-300 rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden max-w-md mx-auto lg:max-w-none relative">
+                {heroImageUrl ? (
+                  <Image
+                    src={heroImageUrl}
+                    alt="Hero Banner"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-white/50 text-base font-medium">
+                    {t.gallery.beforeAfter}
+                  </div>
+                )}
               </div>
               {/* Floating badge - Visible on larger screens */}
               <div className="hidden sm:block absolute -bottom-4 right-4 lg:-bottom-6 lg:-right-6 bg-white rounded-xl sm:rounded-2xl shadow-lg p-3 sm:p-5 rotate-3 hover:rotate-0 transition-transform">

@@ -1,8 +1,9 @@
 import { logout } from '@/app/actions/auth';
 import { getPhotos } from '@/app/actions/gallery';
-import { getProfilePhoto } from '@/app/actions/settings';
+import { getProfilePhoto, getHeroImage } from '@/app/actions/settings';
 import SortablePhotoGrid from '@/app/components/admin/SortablePhotoGrid';
 import ProfilePhotoManager from '@/app/components/admin/ProfilePhotoManager';
+import HeroImageManager from '@/app/components/admin/HeroImageManager';
 import UploadForm from '@/app/components/admin/UploadForm';
 import { LogOut, Image as ImageIcon, BarChart3, History } from 'lucide-react';
 import Link from 'next/link';
@@ -19,6 +20,7 @@ export const dynamic = 'force-dynamic';
 export default async function DashboardPage() {
     const photos = await getPhotos();
     const profilePhoto = await getProfilePhoto();
+    const heroImage = await getHeroImage();
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -76,6 +78,7 @@ export default async function DashboardPage() {
                     </div>
 
                     <ProfilePhotoManager initialPhotoUrl={profilePhoto} />
+                    <HeroImageManager initialPhotoUrl={heroImage} />
                     <UploadForm />
                 </div>
 

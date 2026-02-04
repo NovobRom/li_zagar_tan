@@ -52,8 +52,8 @@ export default function ProfilePhotoManager({ initialPhotoUrl }: { initialPhotoU
 
       if (result.error) {
         setError(result.error);
-      } else if (result.success && result.url) {
-        setPhotoUrl(result.url);
+      } else if (result.success && result.data?.url) {
+        setPhotoUrl(result.data.url);
         setPreview(null);
         setSelectedFile(null);
         setIsCropping(false);

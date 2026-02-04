@@ -77,7 +77,7 @@
 
 #### Чек-лист исправлений:
 
-- [ ] **1.3.1** Добавить rate limiting через Supabase RLS или Redis
+- [x] **1.3.1** Добавить rate limiting через Supabase RLS или Redis (Реализовано базовое ограничение в `security.ts`)
 - [ ] **1.3.2** Валидировать URL через `z.string().url()` перед сохранением
 - [x] **1.3.3** Логировать полные ошибки на сервере, отправлять generic сообщения клиенту
 
@@ -199,11 +199,14 @@
   }
   ```
 - [x] **HTML lang атрибут** — сделать динамическим: `<html lang={language}>`
-- [ ] **hreflang атрибуты** — добавить в head:
-  ```html
-  <link rel="alternate" hreflang="lt" href="https://domain.com/" />
-  <link rel="alternate" hreflang="ru" href="https://domain.com/" />
-  <link rel="alternate" hreflang="en" href="https://domain.com/" />
+- [x] **hreflang атрибуты** — добавить в head (реализовано через `metadata.alternates`):
+  ```typescript
+  alternates: {
+    languages: {
+      'lt-LT': '/?lang=lt',
+      // ...
+    }
+  }
   ```
 
 #### Важные (UX) (Приоритет: HIGH)
@@ -214,7 +217,7 @@
     localStorage.setItem('language', language);
   }, [language]);
   ```
-- [ ] **Автоопределение языка** — проверять `navigator.language` при первом визите
+- [x] **Автоопределение языка** — проверять `navigator.language` при первом визите
 - [ ] **URL структура** — рассмотреть /en/, /ru/, /lt/ пути для лучшего SEO
 
 #### Форматирование (Приоритет: MEDIUM)
@@ -222,7 +225,7 @@
 - [ ] Создать `app/i18n/format.ts` с функциями форматирования
 - [ ] Использовать `Intl.NumberFormat` для чисел
 - [ ] Использовать `Intl.DateTimeFormat` для дат
-- [ ] Форматировать цены через `Intl.NumberFormat` с `style: 'currency'`
+- [x] Форматировать цены через `Intl.NumberFormat` с `style: 'currency'`
 
 #### Дополнительно (Приоритет: LOW)
 
@@ -472,7 +475,7 @@
 
 ### 9.1 Функциональность галереи
 
-- [ ] **Сортировка фото** — drag-and-drop с использованием `display_order`
+- [x] **Сортировка фото** — drag-and-drop с использованием `display_order`
 - [ ] **Категоризация** — фильтры по `service_type`
 - [ ] **До/После галерея** — slider с `before_image_url` / `after_image_url`
 - [ ] **Alt-текст для SEO** — форма редактирования `alt_text_*`
@@ -483,8 +486,8 @@
 ### 9.2 Админ-панель
 
 - [ ] **Breadcrumbs** — навигация в админке
-- [ ] **Dashboard метрики** — статистика загрузок, посещений
-- [ ] **История изменений** — audit log действий
+- [x] **Dashboard метрики** — статистика загрузок, посещений
+- [x] **История изменений** — audit log действий
 - [ ] **Управление контентом** — редактирование текстов на сайте
 - [ ] **Backup/Export** — экспорт галереи и настроек
 

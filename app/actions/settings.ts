@@ -4,43 +4,216 @@ import { createClient } from '@/app/lib/supabase-server';
 import { revalidatePath } from 'next/cache';
 import { fileUploadSchema } from '@/app/lib/validation';
 import { validateMagicBytes, logAction, checkRateLimit } from '@/app/lib/security';
+import { ActionResult, success, failure } from '@/app/lib/actions';
 
-export async function uploadProfilePhoto(formData: FormData) {
+export async function uploadHeroImage(formData: FormData): Promise<ActionResult<{ url: string }>> {
   const supabase = await createClient();
 
   // Auth check
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
-    return { error: 'Unauthorized' };
+    return failure('Unauthorized');
   }
 
   // RBAC check
   const { data: isAdmin } = await supabase.rpc('is_admin');
   if (!isAdmin) {
-    return { error: 'Unauthorized: insufficient permissions' };
+    return failure('Unauthorized: insufficient permissions');
   }
 
-  // Rate Limit Check (e.g., 3 profile photo changes per minute)
-  const isWithinLimit = await checkRateLimit(user.id, 3, 1);
+  // Rate Limit Check
+  const isWithinLimit = await checkRateLimit(user.id, 5, 1);
   if (!isWithinLimit) {
-    return { error: 'Rate limit exceeded. Please wait a minute.' };
+    return failure('Rate limit exceeded. Please wait a minute.');
   }
 
   const file = formData.get('file') as File;
   if (!file) {
-    return { error: 'No file provided' };
+    return failure('No file provided');
   }
 
   // Validation
   const validationResult = fileUploadSchema.safeParse({ file });
   if (!validationResult.success) {
-    return { error: validationResult.error.issues[0].message };
+    return failure(validationResult.error.issues[0].message);
   }
 
   // Magic Bytes Validation
   const isValidImage = await validateMagicBytes(file);
   if (!isValidImage) {
-    return { error: 'Invalid file content: not a real image' };
+    return failure('Invalid file content: not a real image');
+  }
+
+  // 1. Upload to Storage
+  const fileExt = file.name.split('.').pop();
+  const fileName = `hero-image-${Date.now()}.${fileExt}`;
+  const filePath = `settings/${fileName}`;
+
+  // Get current photo to delete later if exists
+  const { data: currentPhoto } = await supabase
+    .from('site_settings')
+    .select('value')
+    .eq('key', 'hero_image')
+    .single();
+
+  const { error: uploadError } = await supabase.storage
+    .from('gallery')
+    .upload(filePath, file);
+
+  if (uploadError) {
+    console.error('Upload error:', uploadError);
+    return failure('Upload failed. Please try again.');
+  }
+
+  // 2. Get Public URL
+  const { data: { publicUrl } } = supabase.storage
+    .from('gallery')
+    .getPublicUrl(filePath);
+
+  // 3. Update Site Settings (upsert)
+  const { error: dbError } = await supabase
+    .from('site_settings')
+    .upsert(
+      {
+        key: 'hero_image',
+        value: { url: publicUrl, storage_path: filePath },
+        updated_at: new Date().toISOString()
+      } as any,
+      { onConflict: 'key' }
+    );
+
+  if (dbError) {
+    // Try to cleanup uploaded file if db update fails
+    await supabase.storage.from('gallery').remove([filePath]);
+    return failure(`Database error: ${dbError.message}`);
+  }
+
+  // 4. Delete old photo if exists
+  if (currentPhoto && (currentPhoto as any).value && ((currentPhoto as any).value as any).storage_path) {
+    const oldPath = ((currentPhoto as any).value as any).storage_path;
+    await supabase.storage.from('gallery').remove([oldPath]);
+  }
+
+  // Audit Log
+  await logAction({
+    action: 'UPLOAD_HERO_IMAGE',
+    entityType: 'settings',
+    entityId: 'hero_image',
+    details: { url: publicUrl }
+  });
+
+  revalidatePath('/admin/dashboard');
+  revalidatePath('/'); // Update home page
+  return success({ url: publicUrl });
+}
+
+export async function deleteHeroImage(): Promise<ActionResult> {
+  const supabase = await createClient();
+
+  // Auth check
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    return failure('Unauthorized');
+  }
+
+  // RBAC check
+  const { data: isAdmin } = await supabase.rpc('is_admin');
+  if (!isAdmin) {
+    return failure('Unauthorized: insufficient permissions');
+  }
+
+  const { data: currentPhoto } = await supabase
+    .from('site_settings')
+    .select('value')
+    .eq('key', 'hero_image')
+    .single();
+
+  if (!currentPhoto || !(currentPhoto as any).value) {
+    return failure('No hero image found');
+  }
+
+  const storagePath = ((currentPhoto as any).value as any)?.storage_path;
+
+  if (storagePath) {
+    const { error: storageError } = await supabase.storage
+      .from('gallery')
+      .remove([storagePath]);
+
+    if (storageError) {
+      console.error('Failed to delete file from storage:', storageError);
+    }
+  }
+
+  const { error: dbError } = await supabase
+    .from('site_settings')
+    .delete()
+    .eq('key', 'hero_image');
+
+  if (dbError) {
+    return failure(`Database error: ${dbError.message}`);
+  }
+
+  // Audit Log
+  await logAction({
+    action: 'DELETE_HERO_IMAGE',
+    entityType: 'settings',
+    entityId: 'hero_image',
+    details: { storagePath }
+  });
+
+  revalidatePath('/admin/dashboard');
+  revalidatePath('/');
+  return success();
+}
+
+export async function getHeroImage() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from('site_settings')
+    .select('value')
+    .eq('key', 'hero_image')
+    .single();
+
+  if (!data || !(data as any).value) return null;
+  return ((data as any).value as any).url as string;
+}
+
+export async function uploadProfilePhoto(formData: FormData): Promise<ActionResult<{ url: string }>> {
+  const supabase = await createClient();
+
+  // Auth check
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    return failure('Unauthorized');
+  }
+
+  // RBAC check
+  const { data: isAdmin } = await supabase.rpc('is_admin');
+  if (!isAdmin) {
+    return failure('Unauthorized: insufficient permissions');
+  }
+
+  // Rate Limit Check (e.g., 3 profile photo changes per minute)
+  const isWithinLimit = await checkRateLimit(user.id, 3, 1);
+  if (!isWithinLimit) {
+    return failure('Rate limit exceeded. Please wait a minute.');
+  }
+
+  const file = formData.get('file') as File;
+  if (!file) {
+    return failure('No file provided');
+  }
+
+  // Validation
+  const validationResult = fileUploadSchema.safeParse({ file });
+  if (!validationResult.success) {
+    return failure(validationResult.error.issues[0].message);
+  }
+
+  // Magic Bytes Validation
+  const isValidImage = await validateMagicBytes(file);
+  if (!isValidImage) {
+    return failure('Invalid file content: not a real image');
   }
 
   // 1. Upload to Storage
@@ -61,7 +234,7 @@ export async function uploadProfilePhoto(formData: FormData) {
 
   if (uploadError) {
     console.error('Upload error:', uploadError);
-    return { error: 'Upload failed. Please try again.' };
+    return failure('Upload failed. Please try again.');
   }
 
   // 2. Get Public URL
@@ -84,7 +257,7 @@ export async function uploadProfilePhoto(formData: FormData) {
   if (dbError) {
     // Try to cleanup uploaded file if db update fails
     await supabase.storage.from('gallery').remove([filePath]);
-    return { error: `Database error: ${dbError.message}` };
+    return failure(`Database error: ${dbError.message}`);
   }
 
   // 4. Delete old photo if exists
@@ -103,22 +276,22 @@ export async function uploadProfilePhoto(formData: FormData) {
 
   revalidatePath('/admin/dashboard');
   revalidatePath('/'); // Update home page
-  return { success: true, url: publicUrl };
+  return success({ url: publicUrl });
 }
 
-export async function deleteProfilePhoto() {
+export async function deleteProfilePhoto(): Promise<ActionResult> {
   const supabase = await createClient();
 
   // Auth check
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
-    return { error: 'Unauthorized' };
+    return failure('Unauthorized');
   }
 
   // RBAC check
   const { data: isAdmin } = await supabase.rpc('is_admin');
   if (!isAdmin) {
-    return { error: 'Unauthorized: insufficient permissions' };
+    return failure('Unauthorized: insufficient permissions');
   }
 
   const { data: currentPhoto } = await supabase
@@ -128,7 +301,7 @@ export async function deleteProfilePhoto() {
     .single();
 
   if (!currentPhoto || !(currentPhoto as any).value) {
-    return { error: 'No profile photo found' };
+    return failure('No profile photo found');
   }
 
   const storagePath = ((currentPhoto as any).value as any)?.storage_path;
@@ -149,7 +322,7 @@ export async function deleteProfilePhoto() {
     .eq('key', 'profile_photo');
 
   if (dbError) {
-    return { error: `Database error: ${dbError.message}` };
+    return failure(`Database error: ${dbError.message}`);
   }
 
   // Audit Log
@@ -162,7 +335,7 @@ export async function deleteProfilePhoto() {
 
   revalidatePath('/admin/dashboard');
   revalidatePath('/');
-  return { success: true };
+  return success();
 }
 
 export async function getProfilePhoto() {

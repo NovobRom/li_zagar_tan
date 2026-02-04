@@ -6,13 +6,15 @@ import PricingSection from './components/PricingSection';
 import ReviewsSection from './components/ReviewsSection';
 import BookingSection from './components/BookingSection';
 import Footer from './components/Footer';
+import { getHeroImage } from './actions/settings';
 
-export default function Home() {
+export default async function Home() {
+  const heroImageUrl = await getHeroImage();
   return (
     <>
       <Header />
       <main id="main-content">
-        <HeroSection />
+        <HeroSection heroImageUrl={heroImageUrl} />
         <AboutSection />
         <GallerySection />
         <PricingSection />
