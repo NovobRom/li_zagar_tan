@@ -18,6 +18,18 @@ export async function uploadPhoto(formData: FormData) {
         return { error: 'No file provided' };
     }
 
+    // Validation
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    const maxSize = 10 * 1024 * 1024; // 10MB
+
+    if (!allowedTypes.includes(file.type)) {
+        return { error: 'Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed.' };
+    }
+
+    if (file.size > maxSize) {
+        return { error: 'File size exceeds 10MB limit.' };
+    }
+
     // 1. Upload to Storage
     const fileExt = file.name.split('.').pop();
     const fileName = `${Date.now()}.${fileExt}`;

@@ -1,18 +1,17 @@
 'use client';
 
 import { uploadPhoto } from '@/app/actions/gallery';
-import { Upload, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { useFormStatus } from 'react-dom';
-import { useRef, useActionState, useEffect, useState } from 'react';
+import { Upload, X, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { useRef, useState, useCallback, useEffect } from 'react';
+import { useDropzone } from 'react-dropzone';
+import Image from 'next/image';
 
-function SubmitButton() {
-    const { pending } = useFormStatus();
-
+function SubmitButton({ pending }: { pending: boolean }) {
     return (
         <button
             type="submit"
             disabled={pending}
-            className="inline-flex items-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50 transition-colors"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50 transition-colors"
         >
             {pending ? (
                 <>
@@ -29,100 +28,161 @@ function SubmitButton() {
     );
 }
 
-const initialState = {
-    error: '',
-    success: false,
-    count: 0,
-};
+interface UploadState {
+    error: string;
+    success: boolean;
+    count: number;
+}
 
 export default function UploadForm() {
-    const formRef = useRef<HTMLFormElement>(null);
+    const [files, setFiles] = useState<File[]>([]);
+    const [previews, setPreviews] = useState<string[]>([]);
+    const [uploading, setUploading] = useState(false);
+    const [state, setState] = useState<UploadState>({ error: '', success: false, count: 0 });
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [state, formAction] = useActionState(async (prevState: any, formData: FormData) => {
-        const files = formData.getAll('file') as File[];
+    const onDrop = useCallback((acceptedFiles: File[]) => {
+        setFiles(prev => [...prev, ...acceptedFiles]);
 
-        if (!files || files.length === 0) {
-            return { error: 'Файлы не выбраны', success: false, count: 0 };
+        // Generate previews
+        const newPreviews = acceptedFiles.map(file => URL.createObjectURL(file));
+        setPreviews(prev => [...prev, ...newPreviews]);
+
+        // Reset state on new selection
+        setState({ error: '', success: false, count: 0 });
+    }, []);
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+        accept: {
+            'image/jpeg': [],
+            'image/png': [],
+            'image/webp': [],
+            'image/gif': []
+        },
+        maxSize: 10 * 1024 * 1024, // 10MB
+        onDropRejected: (fileRejections) => {
+            const errorMsg = fileRejections[0]?.errors[0]?.message || 'Файл отклонён';
+            setState(prev => ({ ...prev, error: `Ошибка выбора: ${errorMsg}` }));
         }
+    });
 
-        let successCount = 0;
-        let firstError = '';
+    const removeFile = (index: number) => {
+        setFiles(prev => prev.filter((_, i) => i !== index));
+        URL.revokeObjectURL(previews[index]); // Cleanup
+        setPreviews(prev => prev.filter((_, i) => i !== index));
+    };
 
-
-        // Process files one by one to avoid overwhelming the server/connection
-        for (const file of files) {
-            if (file.size === 0) continue;
-
-            // Check file size (10MB limit)
-            if (file.size > 10 * 1024 * 1024) {
-                if (!firstError) firstError = `Файл "${file.name}" слишком большой (макс. 10MB)`;
-                continue;
-            }
-
-            const singleFormData = new FormData();
-            singleFormData.append('file', file);
-
-            try {
-                const result = await uploadPhoto(singleFormData);
-
-                if (result.success) {
-                    successCount++;
-                } else {
-                    if (!firstError) firstError = result.error || 'Ошибка загрузки';
-                }
-            } catch (e) {
-                console.error('Upload error:', e);
-                if (!firstError) firstError = 'Произошла ошибка при загрузке. Возможно, файл слишком большой.';
-            }
-        }
-
-        if (successCount === 0 && firstError) {
-            return { error: firstError, success: false, count: 0 };
-        }
-
-        if (successCount < files.length) {
-            return { error: `Загружено ${successCount} из ${files.length}. Ошибка: ${firstError}`, success: true, count: successCount };
-        }
-
-        return { error: '', success: true, count: successCount };
-    }, initialState);
-
+    // Cleanup previews on unmount
     useEffect(() => {
-        if (state.success) {
-            formRef.current?.reset();
+        return () => previews.forEach(url => URL.revokeObjectURL(url));
+    }, [previews]);
+
+    async function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
+
+        if (files.length === 0) {
+            setState({ error: 'Выберите хотя бы один файл', success: false, count: 0 });
+            return;
         }
-    }, [state.success]);
+
+        setUploading(true);
+        setState({ error: '', success: false, count: 0 });
+
+        try {
+            // Parallel uploads
+            const uploadPromises = files.map(file => {
+                const formData = new FormData();
+                formData.append('file', file);
+                return uploadPhoto(formData);
+            });
+
+            const results = await Promise.all(uploadPromises);
+
+            let successCount = 0;
+            let firstError = '';
+
+            results.forEach(res => {
+                if (res.success) successCount++;
+                else if (!firstError && res.error) firstError = res.error;
+            });
+
+            if (successCount === files.length) {
+                // All success
+                setFiles([]);
+                setPreviews([]);
+                setState({ error: '', success: true, count: successCount });
+            } else if (successCount > 0) {
+                // Partial success
+                setState({
+                    error: `Загружено ${successCount} из ${files.length}. Ошибка: ${firstError}`,
+                    success: true,
+                    count: successCount
+                });
+                // Keep failed files ideally, but for now clear all to simplify or user re-selects
+                setFiles([]);
+                setPreviews([]);
+            } else {
+                // All failed
+                setState({ error: firstError || 'Ошибка загрузки', success: false, count: 0 });
+            }
+        } catch (err) {
+            console.error(err);
+            setState({ error: 'Произошла системная ошибка при загрузке', success: false, count: 0 });
+        } finally {
+            setUploading(false);
+        }
+    }
 
     return (
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-8">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Загрузить новые фото</h2>
-            <form
-                ref={formRef}
-                action={formAction}
-                className="flex flex-col sm:flex-row gap-4 items-start sm:items-end"
-            >
-                <div className="flex-1 w-full">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Выберите файлы
-                    </label>
-                    <input
-                        type="file"
-                        name="file"
-                        accept="image/*"
-                        multiple // Allow multiple files
-                        required
-                        className="block w-full text-sm text-gray-500
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-full file:border-0
-                file:text-sm file:font-semibold
-                file:bg-amber-50 file:text-amber-700
-                hover:file:bg-amber-100
-                transition-colors"
-                    />
-                    <p className="mt-1 text-xs text-gray-500">Можно выбрать несколько файлов сразу</p>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div
+                    {...getRootProps()}
+                    className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors
+                        ${isDragActive ? 'border-amber-500 bg-amber-50' : 'border-gray-300 hover:border-amber-400'}
+                        ${state.error ? 'border-red-300' : ''}
+                    `}
+                >
+                    <input {...getInputProps()} />
+                    <div className="flex flex-col items-center gap-2 text-gray-600">
+                        <Upload className="h-8 w-8 text-gray-400" />
+                        {isDragActive ? (
+                            <p>Перетащите файлы сюда...</p>
+                        ) : (
+                            <p>Перетащите фото сюда или кликните для выбора</p>
+                        )}
+                        <p className="text-xs text-gray-400">JPEG, PNG, WebP до 10MB</p>
+                    </div>
                 </div>
-                <SubmitButton />
+
+                {/* Previews Grid */}
+                {files.length > 0 && (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 mt-4">
+                        {previews.map((src, index) => (
+                            <div key={index} className="relative group aspect-square bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
+                                <Image
+                                    src={src}
+                                    alt="Preview"
+                                    fill
+                                    className="object-cover"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => removeFile(index)}
+                                    className="absolute top-1 right-1 bg-white/80 hover:bg-white text-gray-700 rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                    <X className="h-3 w-3" />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                <div className="flex justify-end pt-2">
+                    <SubmitButton pending={uploading} />
+                </div>
             </form>
 
             {state.error && (
