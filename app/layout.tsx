@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { LanguageProvider } from './context/LanguageContext';
+import StructuredData from './components/StructuredData';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -51,7 +52,17 @@ const metadataByLanguage = {
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
   const lang = (cookieStore.get('language')?.value || 'lt') as keyof typeof metadataByLanguage;
-  return metadataByLanguage[lang] || metadataByLanguage['lt'];
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://li-zagar-tan.vercel.app';
+
+  const metadata = metadataByLanguage[lang] || metadataByLanguage['lt'];
+
+  return {
+    ...metadata,
+    metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: '/',
+    },
+  };
 }
 
 export default async function RootLayout({
@@ -64,6 +75,9 @@ export default async function RootLayout({
 
   return (
     <html lang={lang}>
+      <head>
+        <StructuredData />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <LanguageProvider defaultLanguage={lang as any}>{children}</LanguageProvider>
       </body>

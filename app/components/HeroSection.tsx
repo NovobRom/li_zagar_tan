@@ -55,9 +55,10 @@ export default function HeroSection() {
                     <div
                       key={index}
                       className="flex flex-col items-center text-center p-2 sm:p-4 bg-white/60 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-sm"
+                      aria-label={feature.text}
                     >
-                      <Icon className="w-5 h-5 sm:w-7 sm:h-7 text-[#fbbf5d] mb-1 sm:mb-2" />
-                      <span className="text-[10px] sm:text-sm font-medium text-gray-700 leading-tight">
+                      <Icon className="w-5 h-5 sm:w-7 sm:h-7 text-[#fbbf5d] mb-1 sm:mb-2" aria-hidden="true" />
+                      <span className="text-xs sm:text-sm font-medium text-gray-700 leading-tight">
                         {feature.text}
                       </span>
                     </div>
@@ -85,6 +86,7 @@ export default function HeroSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-amber-600 transition-colors inline-flex items-center gap-1"
+                  aria-label="Open location in Google Maps"
                 >
                   📍 <span className="underline underline-offset-2">{t.common.address}</span>
                 </a>
@@ -95,6 +97,7 @@ export default function HeroSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-amber-600 font-medium"
+                    aria-label="Visit Instagram profile"
                   >
                     {t.common.instagram}
                   </a>

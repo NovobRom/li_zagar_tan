@@ -3,6 +3,7 @@
 import { createClient } from '@/app/lib/supabase-server';
 import { revalidatePath } from 'next/cache';
 import { fileUploadSchema } from '@/app/lib/validation';
+import { validateMagicBytes, logAction, checkRateLimit } from '@/app/lib/security';
 
 export async function uploadProfilePhoto(formData: FormData) {
   const supabase = await createClient();
@@ -19,6 +20,12 @@ export async function uploadProfilePhoto(formData: FormData) {
     return { error: 'Unauthorized: insufficient permissions' };
   }
 
+  // Rate Limit Check (e.g., 3 profile photo changes per minute)
+  const isWithinLimit = await checkRateLimit(user.id, 3, 1);
+  if (!isWithinLimit) {
+    return { error: 'Rate limit exceeded. Please wait a minute.' };
+  }
+
   const file = formData.get('file') as File;
   if (!file) {
     return { error: 'No file provided' };
@@ -28,6 +35,12 @@ export async function uploadProfilePhoto(formData: FormData) {
   const validationResult = fileUploadSchema.safeParse({ file });
   if (!validationResult.success) {
     return { error: validationResult.error.issues[0].message };
+  }
+
+  // Magic Bytes Validation
+  const isValidImage = await validateMagicBytes(file);
+  if (!isValidImage) {
+    return { error: 'Invalid file content: not a real image' };
   }
 
   // 1. Upload to Storage
@@ -80,6 +93,14 @@ export async function uploadProfilePhoto(formData: FormData) {
     await supabase.storage.from('gallery').remove([oldPath]);
   }
 
+  // Audit Log
+  await logAction({
+    action: 'UPLOAD_PROFILE_PHOTO',
+    entityType: 'settings',
+    entityId: 'profile_photo',
+    details: { url: publicUrl }
+  });
+
   revalidatePath('/admin/dashboard');
   revalidatePath('/'); // Update home page
   return { success: true, url: publicUrl };
@@ -130,6 +151,14 @@ export async function deleteProfilePhoto() {
   if (dbError) {
     return { error: `Database error: ${dbError.message}` };
   }
+
+  // Audit Log
+  await logAction({
+    action: 'DELETE_PROFILE_PHOTO',
+    entityType: 'settings',
+    entityId: 'profile_photo',
+    details: { storagePath }
+  });
 
   revalidatePath('/admin/dashboard');
   revalidatePath('/');

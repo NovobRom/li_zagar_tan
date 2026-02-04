@@ -19,9 +19,9 @@ export default function ReviewsSection() {
           </p>
           {/* Overall Rating */}
           <div className="mt-3 flex items-center justify-center gap-2">
-            <div className="flex gap-0.5">
+            <div className="flex gap-0.5" aria-label="5 out of 5 stars">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 sm:w-6 sm:h-6 fill-[#fbbf5d] text-[#fbbf5d]" />
+                <Star key={i} className="w-5 h-5 sm:w-6 sm:h-6 fill-[#fbbf5d] text-[#fbbf5d]" aria-hidden="true" />
               ))}
             </div>
             <span className="text-sm sm:text-base font-semibold text-gray-700">
@@ -38,9 +38,9 @@ export default function ReviewsSection() {
               className="flex-shrink-0 w-[280px] sm:w-auto snap-start bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-5 sm:p-6 lg:p-8 shadow-sm"
             >
               {/* Stars */}
-              <div className="flex gap-0.5 mb-3">
+              <div className="flex gap-0.5 mb-3" aria-label={`Rating: ${review.rating} out of 5 stars`}>
                 {[...Array(review.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-[#fbbf5d] text-[#fbbf5d]" />
+                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-[#fbbf5d] text-[#fbbf5d]" aria-hidden="true" />
                 ))}
               </div>
 

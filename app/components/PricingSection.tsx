@@ -41,6 +41,7 @@ export default function PricingSection() {
               key={index}
               className={`relative bg-white rounded-2xl sm:rounded-3xl shadow-lg overflow-hidden ${service.popular ? 'ring-2 ring-amber-500 lg:scale-105' : ''
                 }`}
+              aria-label={`${service.name} service, price ${service.price}, duration ${service.duration}`}
             >
               {/* Popular Badge */}
               {service.popular && (

@@ -4,6 +4,7 @@ import { createClient } from '@/app/lib/supabase-server';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { fileUploadSchema } from '@/app/lib/validation';
+import { validateMagicBytes, logAction, checkRateLimit } from '@/app/lib/security';
 
 export async function uploadPhoto(formData: FormData) {
     const supabase = await createClient();
@@ -20,6 +21,12 @@ export async function uploadPhoto(formData: FormData) {
         return { error: 'Unauthorized: insufficient permissions' };
     }
 
+    // Rate Limit Check (e.g., 5 uploads per minute)
+    const isWithinLimit = await checkRateLimit(user.id, 5, 1);
+    if (!isWithinLimit) {
+        return { error: 'Rate limit exceeded. Please wait a minute.' };
+    }
+
     const file = formData.get('file') as File;
     if (!file) {
         return { error: 'No file provided' };
@@ -29,6 +36,12 @@ export async function uploadPhoto(formData: FormData) {
     const validationResult = fileUploadSchema.safeParse({ file });
     if (!validationResult.success) {
         return { error: validationResult.error.issues[0].message };
+    }
+
+    // Magic Bytes Validation
+    const isValidImage = await validateMagicBytes(file);
+    if (!isValidImage) {
+        return { error: 'Invalid file content: not a real image' };
     }
 
     // 1. Upload to Storage
@@ -64,6 +77,14 @@ export async function uploadPhoto(formData: FormData) {
     if (dbError) {
         return { error: `Database error: ${dbError.message}` };
     }
+
+    // Audit Log
+    await logAction({
+        action: 'UPLOAD_PHOTO',
+        entityType: 'gallery',
+        entityId: filePath,
+        details: { size: file.size, type: file.type }
+    });
 
     revalidatePath('/admin/dashboard');
     revalidatePath('/'); // Update home page gallery
@@ -120,6 +141,14 @@ export async function deletePhoto(id: number, storagePath: string) {
     if (dbError) {
         return { error: `Database delete failed: ${dbError.message}` };
     }
+
+    // Audit Log
+    await logAction({
+        action: 'DELETE_PHOTO',
+        entityType: 'gallery',
+        entityId: id.toString(),
+        details: { storagePath }
+    });
 
     revalidatePath('/admin/dashboard');
     revalidatePath('/');

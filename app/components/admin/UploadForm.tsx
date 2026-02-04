@@ -38,6 +38,7 @@ export default function UploadForm() {
     const [files, setFiles] = useState<File[]>([]);
     const [previews, setPreviews] = useState<string[]>([]);
     const [uploading, setUploading] = useState(false);
+    const [progress, setProgress] = useState(0);
     const [state, setState] = useState<UploadState>({ error: '', success: false, count: 0 });
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -89,11 +90,15 @@ export default function UploadForm() {
         setState({ error: '', success: false, count: 0 });
 
         try {
-            // Parallel uploads
-            const uploadPromises = files.map(file => {
+            // Parallel uploads with progress tracking
+            let completedCount = 0;
+            const uploadPromises = files.map(async (file) => {
                 const formData = new FormData();
                 formData.append('file', file);
-                return uploadPhoto(formData);
+                const res = await uploadPhoto(formData);
+                completedCount++;
+                setProgress(Math.round((completedCount / files.length) * 100));
+                return res;
             });
 
             const results = await Promise.all(uploadPromises);
@@ -130,6 +135,8 @@ export default function UploadForm() {
             setState({ error: 'Произошла системная ошибка при загрузке', success: false, count: 0 });
         } finally {
             setUploading(false);
+            // Don't reset progress immediately so user sees 100%
+            setTimeout(() => setProgress(0), 1000);
         }
     }
 
@@ -156,6 +163,22 @@ export default function UploadForm() {
                         <p className="text-xs text-gray-400">JPEG, PNG, WebP до 10MB</p>
                     </div>
                 </div>
+
+                {/* Progress Bar */}
+                {uploading && (
+                    <div className="space-y-1">
+                        <div className="flex justify-between text-xs text-gray-500">
+                            <span>Загрузка файлов...</span>
+                            <span>{progress}%</span>
+                        </div>
+                        <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+                            <div
+                                className="bg-amber-600 h-full transition-all duration-300 ease-out"
+                                style={{ width: `${progress}%` }}
+                            />
+                        </div>
+                    </div>
+                )}
 
                 {/* Previews Grid */}
                 {files.length > 0 && (

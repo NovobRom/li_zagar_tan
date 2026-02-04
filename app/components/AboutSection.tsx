@@ -6,6 +6,7 @@ import { useLanguage } from '@/app/context/LanguageContext';
 import { useState, useEffect } from 'react';
 import { getProfilePhoto } from '@/app/actions/settings';
 import Image from 'next/image';
+import { blurDataURL } from '@/app/lib/shimmer';
 
 export default function AboutSection() {
   const { t } = useLanguage();
@@ -45,6 +46,8 @@ export default function AboutSection() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  placeholder="blur"
+                  blurDataURL={blurDataURL(400, 500)}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
