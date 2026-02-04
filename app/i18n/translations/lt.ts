@@ -35,8 +35,8 @@ export const lt: Translations = {
 
   // Gallery Section
   gallery: {
-    title: 'Mūsų darbai',
-    subtitle: 'Rezultatai, kurie kalba patys už save',
+    title: 'Rezultatai, kurie kalba patys už save',
+    subtitle: '',
     beforeAfter: 'Prieš / Po',
   },
 
@@ -117,7 +117,7 @@ export const lt: Translations = {
     description:
       'Esu sertifikuota purškiamo įdegio specialistė su aistra tobulam odos atspalviui. Naudoju tik aukščiausios kokybės produktus, kad užtikrinčiau natūralų ir ilgalaikį rezultatą kiekvienai klientei.',
     experience: 'Patirtis',
-    experienceYears: '5+ metų',
+    experienceYears: '2+ metai',
     clients: 'Patenkinti klientai',
     clientsCount: '500+',
     certifications: 'Sertifikatai',

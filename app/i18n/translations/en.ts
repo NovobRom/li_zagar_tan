@@ -35,8 +35,8 @@ export const en: Translations = {
 
   // Gallery Section
   gallery: {
-    title: 'Our Work',
-    subtitle: 'Results that speak for themselves',
+    title: 'Results that speak for themselves',
+    subtitle: '',
     beforeAfter: 'Before / After',
   },
 
@@ -117,7 +117,7 @@ export const en: Translations = {
     description:
       'I am a certified spray tan specialist with a passion for the perfect skin tone. I use only the highest quality products to ensure natural and long-lasting results for every client.',
     experience: 'Experience',
-    experienceYears: '5+ years',
+    experienceYears: '2+ years',
     clients: 'Happy clients',
     clientsCount: '500+',
     certifications: 'Certifications',

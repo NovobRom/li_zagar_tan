@@ -35,8 +35,8 @@ export const ru: Translations = {
 
   // Gallery Section
   gallery: {
-    title: 'Наши работы',
-    subtitle: 'Результаты, которые говорят сами за себя',
+    title: 'Результаты, которые говорят сами за себя',
+    subtitle: '',
     beforeAfter: 'До / После',
   },
 
@@ -117,7 +117,7 @@ export const ru: Translations = {
     description:
       'Я сертифицированный специалист по моментальному загару с любовью к идеальному оттенку кожи. Использую только продукты высшего качества для достижения натурального и стойкого результата для каждой клиентки.',
     experience: 'Опыт',
-    experienceYears: '5+ лет',
+    experienceYears: '2+ года',
     clients: 'Довольные клиенты',
     clientsCount: '500+',
     certifications: 'Сертификаты',
