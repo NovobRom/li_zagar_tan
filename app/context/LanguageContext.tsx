@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
 import { translations, Language, Translations } from '@/app/i18n';
 
 interface LanguageContextType {
@@ -19,8 +19,17 @@ interface LanguageProviderProps {
 export function LanguageProvider({ children, defaultLanguage = 'lt' }: LanguageProviderProps) {
   const [language, setLanguageState] = useState<Language>(defaultLanguage);
 
+  useEffect(() => {
+    const saved = localStorage.getItem('language') as Language;
+    if (saved && (saved === 'en' || saved === 'lt' || saved === 'ru')) {
+      setLanguageState(saved);
+    }
+  }, []);
+
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
+    localStorage.setItem('language', lang);
+    document.cookie = `language=${lang}; path=/; max-age=31536000`; // 1 year
   }, []);
 
   const t = translations[language];

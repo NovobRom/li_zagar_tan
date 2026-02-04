@@ -2,6 +2,7 @@
 
 import { createClient } from '@/app/lib/supabase-server';
 import { revalidatePath } from 'next/cache';
+import { fileUploadSchema } from '@/app/lib/validation';
 
 export async function uploadProfilePhoto(formData: FormData) {
   const supabase = await createClient();
@@ -12,27 +13,27 @@ export async function uploadProfilePhoto(formData: FormData) {
     return { error: 'Unauthorized' };
   }
 
+  // RBAC check
+  const { data: isAdmin } = await supabase.rpc('is_admin');
+  if (!isAdmin) {
+    return { error: 'Unauthorized: insufficient permissions' };
+  }
+
   const file = formData.get('file') as File;
   if (!file) {
     return { error: 'No file provided' };
+  }
+
+  // Validation
+  const validationResult = fileUploadSchema.safeParse({ file });
+  if (!validationResult.success) {
+    return { error: validationResult.error.issues[0].message };
   }
 
   // 1. Upload to Storage
   const fileExt = file.name.split('.').pop();
   const fileName = `profile-photo-${Date.now()}.${fileExt}`;
   const filePath = `settings/${fileName}`;
-
-  // Validation
-  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-  const maxSize = 10 * 1024 * 1024; // 10MB
-
-  if (!allowedTypes.includes(file.type)) {
-    return { error: 'Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed.' };
-  }
-
-  if (file.size > maxSize) {
-    return { error: 'File size exceeds 10MB limit.' };
-  }
 
   // Get current photo to delete later if exists
   const { data: currentPhoto } = await supabase
@@ -46,7 +47,8 @@ export async function uploadProfilePhoto(formData: FormData) {
     .upload(filePath, file);
 
   if (uploadError) {
-    return { error: `Upload failed: ${uploadError.message}` };
+    console.error('Upload error:', uploadError);
+    return { error: 'Upload failed. Please try again.' };
   }
 
   // 2. Get Public URL
@@ -90,6 +92,12 @@ export async function deleteProfilePhoto() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
     return { error: 'Unauthorized' };
+  }
+
+  // RBAC check
+  const { data: isAdmin } = await supabase.rpc('is_admin');
+  if (!isAdmin) {
+    return { error: 'Unauthorized: insufficient permissions' };
   }
 
   const { data: currentPhoto } = await supabase

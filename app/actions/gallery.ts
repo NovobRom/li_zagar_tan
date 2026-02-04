@@ -3,6 +3,7 @@
 import { createClient } from '@/app/lib/supabase-server';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { fileUploadSchema } from '@/app/lib/validation';
 
 export async function uploadPhoto(formData: FormData) {
     const supabase = await createClient();
@@ -13,21 +14,21 @@ export async function uploadPhoto(formData: FormData) {
         redirect('/admin');
     }
 
+    // RBAC check
+    const { data: isAdmin } = await supabase.rpc('is_admin');
+    if (!isAdmin) {
+        return { error: 'Unauthorized: insufficient permissions' };
+    }
+
     const file = formData.get('file') as File;
     if (!file) {
         return { error: 'No file provided' };
     }
 
     // Validation
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-    const maxSize = 10 * 1024 * 1024; // 10MB
-
-    if (!allowedTypes.includes(file.type)) {
-        return { error: 'Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed.' };
-    }
-
-    if (file.size > maxSize) {
-        return { error: 'File size exceeds 10MB limit.' };
+    const validationResult = fileUploadSchema.safeParse({ file });
+    if (!validationResult.success) {
+        return { error: validationResult.error.issues[0].message };
     }
 
     // 1. Upload to Storage
@@ -40,7 +41,8 @@ export async function uploadPhoto(formData: FormData) {
         .upload(filePath, file);
 
     if (uploadError) {
-        return { error: `Upload failed: ${uploadError.message}` };
+        console.error('Upload error:', uploadError);
+        return { error: 'Upload failed. Please try again.' };
     }
 
     // 2. Get Public URL
@@ -77,16 +79,39 @@ export async function deletePhoto(id: number, storagePath: string) {
         redirect('/admin');
     }
 
-    // 1. Delete from Storage
+    // RBAC check
+    const { data: isAdmin } = await supabase.rpc('is_admin');
+    if (!isAdmin) {
+        return { error: 'Unauthorized: insufficient permissions' };
+    }
+
+    // 1. Get photo details to verify ownership/path
+    const { data: photo, error: fetchError } = await supabase
+        .from('gallery')
+        .select('storage_path')
+        .eq('id', id)
+        .single();
+
+    if (fetchError || !photo) {
+        return { error: 'Photo not found' };
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if ((photo as any).storage_path !== storagePath) {
+        return { error: 'Invalid storage path provided' };
+    }
+
+    // 2. Delete from Storage
     const { error: storageError } = await supabase.storage
         .from('gallery')
-        .remove([storagePath]);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .remove([(photo as any).storage_path]);
 
     if (storageError) {
         return { error: `Storage delete failed: ${storageError.message}` };
     }
 
-    // 2. Delete from Table
+    // 3. Delete from Table
     const { error: dbError } = await supabase
         .from('gallery')
         .delete()
