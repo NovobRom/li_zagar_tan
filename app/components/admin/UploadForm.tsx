@@ -49,19 +49,31 @@ export default function UploadForm() {
         let successCount = 0;
         let firstError = '';
 
+
         // Process files one by one to avoid overwhelming the server/connection
         for (const file of files) {
             if (file.size === 0) continue;
 
+            // Check file size (10MB limit)
+            if (file.size > 10 * 1024 * 1024) {
+                if (!firstError) firstError = `Файл "${file.name}" слишком большой (макс. 10MB)`;
+                continue;
+            }
+
             const singleFormData = new FormData();
             singleFormData.append('file', file);
 
-            const result = await uploadPhoto(singleFormData);
+            try {
+                const result = await uploadPhoto(singleFormData);
 
-            if (result.success) {
-                successCount++;
-            } else {
-                if (!firstError) firstError = result.error || 'Ошибка загрузки';
+                if (result.success) {
+                    successCount++;
+                } else {
+                    if (!firstError) firstError = result.error || 'Ошибка загрузки';
+                }
+            } catch (e) {
+                console.error('Upload error:', e);
+                if (!firstError) firstError = 'Произошла ошибка при загрузке. Возможно, файл слишком большой.';
             }
         }
 
