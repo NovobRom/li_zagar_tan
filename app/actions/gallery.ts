@@ -1,11 +1,11 @@
 'use server';
 
-import { createClient } from '@/app/lib/supabase';
+import { createClient } from '@/app/lib/supabase-server';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 export async function uploadPhoto(formData: FormData) {
-    const supabase = createClient();
+    const supabase = await createClient();
 
     // Auth check
     const { data: { user } } = await supabase.auth.getUser();
@@ -45,7 +45,7 @@ export async function uploadPhoto(formData: FormData) {
                 storage_path: filePath,
                 created_at: new Date().toISOString(),
             },
-        ]);
+        ] as any);
 
     if (dbError) {
         return { error: `Database error: ${dbError.message}` };
@@ -57,7 +57,7 @@ export async function uploadPhoto(formData: FormData) {
 }
 
 export async function deletePhoto(id: number, storagePath: string) {
-    const supabase = createClient();
+    const supabase = await createClient();
 
     // Auth check
     const { data: { user } } = await supabase.auth.getUser();
@@ -90,7 +90,7 @@ export async function deletePhoto(id: number, storagePath: string) {
 }
 
 export async function getPhotos() {
-    const supabase = createClient();
+    const supabase = await createClient();
     const { data } = await supabase
         .from('gallery')
         .select('*')

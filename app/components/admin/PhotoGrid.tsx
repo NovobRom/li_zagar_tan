@@ -36,7 +36,7 @@ export default function PhotoGrid({ photos }: { photos: PhotoProps[] }) {
 
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <button
-                            onClick={() => startTransition(() => deletePhoto(photo.id, photo.storage_path))}
+                            onClick={() => startTransition(() => { void deletePhoto(photo.id, photo.storage_path) })}
                             disabled={isPending}
                             className="p-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors transform hover:scale-110 disabled:opacity-50"
                             title="Удалить"

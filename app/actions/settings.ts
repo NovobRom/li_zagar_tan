@@ -1,10 +1,10 @@
 'use server';
 
-import { createClient } from '@/app/lib/supabase';
+import { createClient } from '@/app/lib/supabase-server';
 import { revalidatePath } from 'next/cache';
 
 export async function uploadProfilePhoto(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // Auth check
   const { data: { user } } = await supabase.auth.getUser();
@@ -39,11 +39,11 @@ export async function uploadProfilePhoto(formData: FormData) {
   const { error: dbError } = await supabase
     .from('site_settings')
     .upsert(
-      { 
-        key: 'profile_photo', 
+      {
+        key: 'profile_photo',
         value: { url: publicUrl, storage_path: filePath },
         updated_at: new Date().toISOString()
-      },
+      } as any,
       { onConflict: 'key' }
     );
 
@@ -57,14 +57,14 @@ export async function uploadProfilePhoto(formData: FormData) {
 }
 
 export async function getProfilePhoto() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase
     .from('site_settings')
     .select('value')
     .eq('key', 'profile_photo')
     .single();
 
-  if (!data || !data.value) return null;
+  if (!data || !(data as any).value) return null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (data.value as any).url as string;
+  return ((data as any).value as any).url as string;
 }
