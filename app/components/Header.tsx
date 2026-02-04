@@ -9,6 +9,7 @@ export default function Header() {
   const { language, setLanguage, t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   // Handle scroll effect
   useEffect(() => {
@@ -17,6 +18,28 @@ export default function Header() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Handle active section highlight
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection('#' + entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: '-50% 0px -50% 0px', // Trigger when section is in the middle of viewport
+        threshold: 0,
+      }
+    );
+
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach((section) => observer.observe(section));
+
+    return () => sections.forEach((section) => observer.unobserve(section));
   }, []);
 
   // Close menu on resize to desktop
@@ -88,7 +111,10 @@ export default function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="text-gray-600 hover:text-amber-600 font-medium transition-colors text-sm lg:text-base"
+                  className={`font-medium transition-colors text-sm lg:text-base ${activeSection === item.href
+                    ? 'text-amber-600'
+                    : 'text-gray-600 hover:text-amber-600'
+                    }`}
                 >
                   {item.label}
                 </a>
@@ -111,8 +137,8 @@ export default function Header() {
                     key={lang.code}
                     onClick={() => setLanguage(lang.code as Language)}
                     className={`px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs font-medium transition-all ${language === lang.code
-                        ? 'bg-gradient-to-r from-amber-500 via-[#fbbf5d] to-orange-500 text-white shadow-md'
-                        : 'text-[#333333] hover:bg-gray-200'
+                      ? 'bg-gradient-to-r from-amber-500 via-[#fbbf5d] to-orange-500 text-white shadow-md'
+                      : 'text-[#333333] hover:bg-gray-200'
                       }`}
                   >
                     {lang.name}
@@ -166,7 +192,10 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="block px-6 py-3 text-gray-700 hover:bg-amber-50 hover:text-amber-600 font-medium transition-colors"
+                className={`block px-6 py-3 font-medium transition-colors ${activeSection === item.href
+                  ? 'bg-amber-50 text-amber-600'
+                  : 'text-gray-700 hover:bg-amber-50 hover:text-amber-600'
+                  }`}
               >
                 {item.label}
               </a>

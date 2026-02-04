@@ -3,8 +3,21 @@
 import { Award, Heart, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/app/context/LanguageContext';
 
+import { useState, useEffect } from 'react';
+import { getProfilePhoto } from '@/app/actions/settings';
+import Image from 'next/image';
+
 export default function AboutSection() {
   const { t } = useLanguage();
+  const [profilePhoto, setProfilePhoto] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchPhoto() {
+      const url = await getProfilePhoto();
+      if (url) setProfilePhoto(url);
+    }
+    fetchPhoto();
+  }, []);
 
   const stats = [
     { label: t.about.experience, value: t.about.experienceYears },
@@ -24,16 +37,25 @@ export default function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Photo */}
           <div className="relative order-1 lg:order-1">
-            <div className="aspect-[4/5] max-w-sm mx-auto lg:max-w-none bg-gradient-to-br from-amber-100 to-orange-200 rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
-              {/* Placeholder - replace with actual photo */}
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center p-6">
-                  <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 bg-gradient-to-br from-amber-300 to-orange-400 rounded-full flex items-center justify-center">
-                    <span className="text-4xl sm:text-5xl text-white/80">L</span>
+            <div className="aspect-[4/5] max-w-sm mx-auto lg:max-w-none bg-gradient-to-br from-amber-100 to-orange-200 rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden relative">
+              {profilePhoto ? (
+                <Image
+                  src={profilePhoto}
+                  alt="Li Zagar"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="text-center p-6">
+                    <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 bg-gradient-to-br from-amber-300 to-orange-400 rounded-full flex items-center justify-center">
+                      <span className="text-4xl sm:text-5xl text-white/80">L</span>
+                    </div>
+                    <p className="text-amber-600/60 text-sm">Photo</p>
                   </div>
-                  <p className="text-amber-600/60 text-sm">Photo</p>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Decorative element */}

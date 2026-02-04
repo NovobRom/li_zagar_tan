@@ -160,11 +160,13 @@ export type Database = {
       }
       gallery: {
         Row: {
-          after_image_url: string
+          after_image_url: string | null
           alt_text_en: string | null
           alt_text_lt: string | null
           alt_text_ru: string | null
-          before_image_url: string
+          before_image_url: string | null
+          image_url: string | null
+          storage_path: string | null
           created_at: string | null
           display_order: number | null
           id: string
@@ -174,11 +176,13 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
-          after_image_url: string
+          after_image_url?: string | null
           alt_text_en?: string | null
           alt_text_lt?: string | null
           alt_text_ru?: string | null
-          before_image_url: string
+          before_image_url?: string | null
+          image_url?: string | null
+          storage_path?: string | null
           created_at?: string | null
           display_order?: number | null
           id?: string
@@ -188,11 +192,13 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
-          after_image_url?: string
+          after_image_url?: string | null
           alt_text_en?: string | null
           alt_text_lt?: string | null
           alt_text_ru?: string | null
-          before_image_url?: string
+          before_image_url?: string | null
+          image_url?: string | null
+          storage_path?: string | null
           created_at?: string | null
           display_order?: number | null
           id?: string

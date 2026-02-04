@@ -1,6 +1,8 @@
 import { logout } from '@/app/actions/auth';
 import { getPhotos } from '@/app/actions/gallery';
+import { getProfilePhoto } from '@/app/actions/settings';
 import PhotoGrid from '@/app/components/admin/PhotoGrid';
+import ProfilePhotoManager from '@/app/components/admin/ProfilePhotoManager';
 import UploadForm from '@/app/components/admin/UploadForm';
 import { LogOut, Image as ImageIcon } from 'lucide-react';
 
@@ -13,6 +15,7 @@ import { LogOut, Image as ImageIcon } from 'lucide-react';
 
 export default async function DashboardPage() {
     const photos = await getPhotos();
+    const profilePhoto = await getProfilePhoto();
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -41,7 +44,10 @@ export default async function DashboardPage() {
             </div>
 
             {/* Upload Section */}
-            <UploadForm />
+            <div className="space-y-8">
+                <ProfilePhotoManager initialPhotoUrl={profilePhoto} />
+                <UploadForm />
+            </div>
 
             {/* Grid Section */}
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
