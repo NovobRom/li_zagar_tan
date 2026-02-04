@@ -62,7 +62,11 @@ export default function PricingSection() {
                 {/* Price & Duration row on mobile */}
                 <div className="flex items-center justify-between mb-4 sm:mb-6">
                   <span className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-amber-600 via-[#fbbf5d] to-orange-600 bg-clip-text text-transparent">
-                    {service.price}
+                    {new Intl.NumberFormat(undefined, {
+                      style: 'currency',
+                      currency: 'EUR',
+                      minimumFractionDigits: 0,
+                    }).format(service.price)}
                   </span>
                   <div className="flex items-center gap-1.5 text-gray-600 text-sm">
                     <Clock className="w-4 h-4 text-[#fbbf5d]" />

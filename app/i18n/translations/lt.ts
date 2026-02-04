@@ -48,19 +48,19 @@ export const lt: Translations = {
       fullBody: {
         name: 'Purškiamas įdegis visam kūnui',
         description: 'Tolygus, natūralus įdegis visam kūnui',
-        price: '40€',
+        price: 40,
         duration: '30 min',
       },
       legs: {
         name: 'Purškiamas įdegis kojoms',
         description: 'Idealus vasarai ir specialioms progoms',
-        price: '20€',
+        price: 20,
         duration: '20 min',
       },
       bioPeeling: {
         name: 'Biopilingas',
         description: 'Paruošia odą tobulam įdegiui',
-        price: '5€',
+        price: 5,
         duration: '5 min',
       },
     },

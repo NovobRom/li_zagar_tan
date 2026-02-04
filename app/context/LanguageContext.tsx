@@ -19,18 +19,24 @@ interface LanguageProviderProps {
 export function LanguageProvider({ children, defaultLanguage = 'lt' }: LanguageProviderProps) {
   const [language, setLanguageState] = useState<Language>(defaultLanguage);
 
-  useEffect(() => {
-    const saved = localStorage.getItem('language') as Language;
-    if (saved && (saved === 'en' || saved === 'lt' || saved === 'ru')) {
-      setLanguageState(saved);
-    }
-  }, []);
-
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('language', lang);
     document.cookie = `language=${lang}; path=/; max-age=31536000`; // 1 year
   }, []);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('language') as Language;
+    if (saved && (saved === 'en' || saved === 'lt' || saved === 'ru')) {
+      setLanguageState(saved);
+    } else {
+      // Auto-detect browser language
+      const browserLang = navigator.language.split('-')[0] as Language;
+      if (['en', 'lt', 'ru'].includes(browserLang)) {
+        setLanguage(browserLang);
+      }
+    }
+  }, [setLanguage]);
 
   const t = translations[language];
 

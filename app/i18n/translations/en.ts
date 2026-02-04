@@ -48,19 +48,19 @@ export const en: Translations = {
       fullBody: {
         name: 'Full Body Spray Tan',
         description: 'Even, natural tan for your entire body',
-        price: '40€',
+        price: 40,
         duration: '30 min',
       },
       legs: {
         name: 'Legs Only Spray Tan',
         description: 'Perfect for summer and special occasions',
-        price: '20€',
+        price: 20,
         duration: '20 min',
       },
       bioPeeling: {
         name: 'Bio Peeling',
         description: 'Prepares your skin for the perfect tan',
-        price: '5€',
+        price: 5,
         duration: '5 min',
       },
     },

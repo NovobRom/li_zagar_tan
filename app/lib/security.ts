@@ -40,12 +40,12 @@ export async function logAction(params: {
 
     if (!user) return;
 
-    await supabase.from('audit_logs').insert({
+    await (supabase.from('audit_logs') as any).insert({
         user_id: user.id,
         action: params.action,
         entity_type: params.entityType,
-        entity_id: params.entityId,
-        details: params.details,
+        entity_id: params.entityId || null,
+        details: params.details || null,
     });
 }
 

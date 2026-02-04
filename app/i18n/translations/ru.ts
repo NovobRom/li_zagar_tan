@@ -48,19 +48,19 @@ export const ru: Translations = {
       fullBody: {
         name: 'Моментальный загар на всё тело',
         description: 'Равномерный, натуральный загар на всё тело',
-        price: '40€',
+        price: 40,
         duration: '30 мин',
       },
       legs: {
         name: 'Моментальный загар только ноги',
         description: 'Идеально для лета и особых случаев',
-        price: '20€',
+        price: 20,
         duration: '20 мин',
       },
       bioPeeling: {
         name: 'Биопилинг',
         description: 'Подготовит кожу к идеальному загару',
-        price: '5€',
+        price: 5,
         duration: '5 мин',
       },
     },

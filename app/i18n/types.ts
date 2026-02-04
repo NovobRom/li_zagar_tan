@@ -7,7 +7,7 @@ export interface Review {
 export interface ServiceTranslation {
   name: string;
   description: string;
-  price: string;
+  price: number;
   duration: string;
 }
 

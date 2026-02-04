@@ -61,6 +61,11 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(baseUrl),
     alternates: {
       canonical: '/',
+      languages: {
+        'lt-LT': '/?lang=lt',
+        'ru-RU': '/?lang=ru',
+        'en-US': '/?lang=en',
+      },
     },
   };
 }
