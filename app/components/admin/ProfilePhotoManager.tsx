@@ -106,36 +106,42 @@ export default function ProfilePhotoManager({ initialPhotoUrl }: { initialPhotoU
             action={handleUpload}
             className="space-y-4"
           >
-            {!preview ? (
-              // Initial State: Select File or Delete Existing
-              <div className="space-y-3">
-                <div className="relative">
-                  <input
-                    type="file"
-                    name="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className="opacity-0 absolute inset-0 w-full h-full cursor-pointer z-10"
-                    required
-                  />
-                  <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 border border-gray-200 border-dashed rounded-lg text-gray-600 hover:bg-gray-100 transition-colors">
-                    <Upload className="w-4 h-4" />
-                    <span className="text-sm">Выберите новое фото...</span>
-                  </div>
+            {/* 
+                Input must remain in DOM to preserve value. 
+                We toggle visibility instead of conditional rendering. 
+            */}
+            <div className={preview ? 'hidden' : 'block space-y-3'}>
+              <div className="relative">
+                <input
+                  type="file"
+                  id="profile-photo-input"
+                  name="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="opacity-0 absolute inset-0 w-full h-full cursor-pointer z-10"
+                // removed required to avoid browser tooltip issues when hidden, 
+                // but logic handles validation manually.
+                // Actually, keep required but maybe it's okay if we validate manually.
+                />
+                <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 border border-gray-200 border-dashed rounded-lg text-gray-600 hover:bg-gray-100 transition-colors">
+                  <Upload className="w-4 h-4" />
+                  <span className="text-sm">Выберите новое фото...</span>
                 </div>
-
-                {photoUrl && (
-                  <button
-                    type="button"
-                    onClick={handleDelete}
-                    className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                    Удалить текущее фото
-                  </button>
-                )}
               </div>
-            ) : (
+
+              {photoUrl && (
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors relative z-20"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  Удалить текущее фото
+                </button>
+              )}
+            </div>
+
+            {preview && (
               // Preview State: Upload confirmation
               <div className="space-y-3">
                 <div className="flex gap-2">
