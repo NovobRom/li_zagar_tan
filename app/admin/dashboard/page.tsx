@@ -13,6 +13,8 @@ import { LogOut, Image as ImageIcon } from 'lucide-react';
   - Shows Gallery Grid
 */
 
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardPage() {
     const photos = await getPhotos();
     const profilePhoto = await getProfilePhoto();

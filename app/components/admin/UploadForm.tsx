@@ -1,9 +1,9 @@
 'use client';
 
 import { uploadPhoto } from '@/app/actions/gallery';
-import { Upload } from 'lucide-react';
+import { Upload, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useFormStatus } from 'react-dom';
-import { useRef } from 'react';
+import { useRef, useActionState, useEffect } from 'react';
 
 function SubmitButton() {
     const { pending } = useFormStatus();
@@ -29,37 +29,69 @@ function SubmitButton() {
     );
 }
 
+const initialState = {
+    error: '',
+    success: false,
+};
+
 export default function UploadForm() {
     const formRef = useRef<HTMLFormElement>(null);
+    const [state, formAction] = useActionState(async (prevState: any, formData: FormData) => {
+        const result = await uploadPhoto(formData);
+        if (result.error) {
+            return { error: result.error, success: false };
+        }
+        return { error: '', success: true };
+    }, initialState);
+
+    useEffect(() => {
+        if (state.success) {
+            formRef.current?.reset();
+        }
+    }, [state.success]);
 
     return (
-        <form
-            ref={formRef}
-            action={async (formData) => {
-                await uploadPhoto(formData);
-                formRef.current?.reset();
-            }}
-            className="flex gap-4 items-end bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-8"
-        >
-            <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Новое фото
-                </label>
-                <input
-                    type="file"
-                    name="file"
-                    accept="image/*"
-                    required
-                    className="block w-full text-sm text-gray-500
-            file:mr-4 file:py-2 file:px-4
-            file:rounded-full file:border-0
-            file:text-sm file:font-semibold
-            file:bg-amber-50 file:text-amber-700
-            hover:file:bg-amber-100
-            transition-colors"
-                />
-            </div>
-            <SubmitButton />
-        </form>
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-8">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Загрузить новое фото</h2>
+            <form
+                ref={formRef}
+                action={formAction}
+                className="flex flex-col sm:flex-row gap-4 items-start sm:items-end"
+            >
+                <div className="flex-1 w-full">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Выберите файл
+                    </label>
+                    <input
+                        type="file"
+                        name="file"
+                        accept="image/*"
+                        required
+                        className="block w-full text-sm text-gray-500
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-full file:border-0
+                file:text-sm file:font-semibold
+                file:bg-amber-50 file:text-amber-700
+                hover:file:bg-amber-100
+                transition-colors"
+                    />
+                </div>
+                <SubmitButton />
+            </form>
+
+            {state.error && (
+                <div className="mt-4 p-3 bg-red-50 text-red-700 rounded-lg flex items-center gap-2 text-sm">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    {state.error}
+                </div>
+            )}
+
+            {state.success && (
+                <div className="mt-4 p-3 bg-green-50 text-green-700 rounded-lg flex items-center gap-2 text-sm">
+                    <CheckCircle2 className="h-4 w-4 shrink-0" />
+                    Фото успешно загружено!
+                </div>
+            )}
+        </div>
     );
 }
