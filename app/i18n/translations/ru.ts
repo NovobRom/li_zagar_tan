@@ -38,6 +38,7 @@ export const ru: Translations = {
     title: 'Результаты, которые говорят сами за себя',
     subtitle: '',
     beforeAfter: 'До / После',
+    loading: 'Фотографии загружаются...',
   },
 
   // Pricing Section
@@ -46,13 +47,13 @@ export const ru: Translations = {
     subtitle: 'Прозрачные цены без скрытых платежей',
     services: {
       fullBody: {
-        name: 'Моментальный загар на всё тело',
+        name: 'Загар (всё тело)',
         description: 'Равномерный, натуральный загар на всё тело',
         price: 40,
         duration: '30 мин',
       },
       legs: {
-        name: 'Моментальный загар только ноги',
+        name: 'Загар (ноги)',
         description: 'Идеально для лета и особых случаев',
         price: 20,
         duration: '20 мин',
@@ -121,10 +122,10 @@ export const ru: Translations = {
     clients: 'Довольные клиенты',
     clientsCount: '500+',
     certifications: 'Сертификаты',
-    certificationsCount: 'Профессиональные',
+    certificationsCount: 'Профессион.',
     qualities: {
       professional: 'Профессионализм',
-      individual: 'Индивидуальный подход',
+      individual: 'Индивид. подход',
       quality: 'Качество',
     },
   },

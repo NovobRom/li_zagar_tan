@@ -55,7 +55,7 @@ export default function PricingSection() {
                 <h3 className="text-lg sm:text-xl font-bold text-[#171717] mb-2 pr-16 sm:pr-0">
                   {service.name}
                 </h3>
-                <p className="text-[#333333] text-sm mb-4 sm:mb-6">
+                <p className="text-[#333333] text-sm mb-4 sm:mb-6 min-h-[3rem]">
                   {service.description}
                 </p>
 

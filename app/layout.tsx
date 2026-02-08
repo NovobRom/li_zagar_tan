@@ -26,6 +26,11 @@ const metadataByLanguage = {
       description: 'Profesionalus purškiamas įdegis per 30 minučių. Efektas išlieka 7-10 dienų.',
       type: 'website',
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'li_zagar_tan | Purškiamas įdegis Vilniuje',
+      description: 'Profesionalus purškiamas įdegis (spray tan) Vilniuje. Saugus, natūralus rezultatas per 30 minučių.',
+    },
   },
   ru: {
     title: 'li_zagar_tan | Моментальный загар в Вильнюсе',
@@ -36,6 +41,11 @@ const metadataByLanguage = {
       description: 'Профессиональный моментальный загар за 30 минут. Эффект 7-10 дней.',
       type: 'website',
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'li_zagar_tan | Моментальный загар в Вильнюсе',
+      description: 'Профессиональный моментальный загар (spray tan) в Вильнюсе. Безопасный, натуральный результат за 30 минут.',
+    },
   },
   en: {
     title: 'li_zagar_tan | Spray Tan in Vilnius',
@@ -45,6 +55,11 @@ const metadataByLanguage = {
       title: 'li_zagar_tan | Spray Tan in Vilnius',
       description: 'Professional spray tan in 30 minutes. Effect lasts 7-10 days.',
       type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'li_zagar_tan | Spray Tan in Vilnius',
+      description: 'Professional spray tan in Vilnius. Safe, natural result in 30 minutes.',
     },
   },
 };

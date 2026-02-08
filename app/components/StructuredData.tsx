@@ -8,7 +8,7 @@ export default function StructuredData() {
         'image': 'https://li-zagar-tan.vercel.app/og-image.jpg', // Placeholder
         '@id': 'https://li-zagar-tan.vercel.app',
         'url': 'https://li-zagar-tan.vercel.app',
-        'telephone': '',
+
         'address': {
             '@type': 'PostalAddress',
             'streetAddress': 'A. Goštauto g. 8-211',

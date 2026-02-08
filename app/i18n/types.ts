@@ -42,6 +42,7 @@ export interface Translations {
     title: string;
     subtitle: string;
     beforeAfter: string;
+    loading: string;
   };
   pricing: {
     title: string;

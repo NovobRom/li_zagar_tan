@@ -63,7 +63,7 @@ export default function TreatwellWidget({ className = '' }: TreatwellWidgetProps
         src="https://book.treatwell.lt/common/venue-menu/javascript/widget-button.js?v1"
         strategy="lazyOnload"
         onLoad={() => {
-          console.log('Treatwell widget loaded');
+          // Treatwell widget loaded
         }}
       />
     </div>

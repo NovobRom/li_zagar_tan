@@ -84,7 +84,7 @@ export default function GallerySection() {
           </div>
         ) : (
           <div className="text-center py-12 bg-gray-50 rounded-2xl border border-gray-100">
-            <p className="text-gray-500">Фотографии загружаются...</p>
+            <p className="text-gray-500">{t.gallery.loading}</p>
             {/* Fallback for empty state if needed - maybe show placeholders from before? 
                 For now keeping it clean as per "Results imply real photos" */}
           </div>

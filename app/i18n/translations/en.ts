@@ -38,6 +38,7 @@ export const en: Translations = {
     title: 'Results that speak for themselves',
     subtitle: '',
     beforeAfter: 'Before / After',
+    loading: 'Photos are loading...',
   },
 
   // Pricing Section

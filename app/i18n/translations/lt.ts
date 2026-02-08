@@ -38,6 +38,7 @@ export const lt: Translations = {
     title: 'Rezultatai, kurie kalba patys už save',
     subtitle: '',
     beforeAfter: 'Prieš / Po',
+    loading: 'Nuotraukos kraunamos...',
   },
 
   // Pricing Section
