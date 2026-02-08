@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { languages, Language } from '@/app/i18n';
+import MobileMenu from './MobileMenu';
 
 export default function Header() {
   const { language, setLanguage, t } = useLanguage();
@@ -53,17 +54,7 @@ export default function Header() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Prevent body scroll when menu is open
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMenuOpen]);
+
 
   const navItems = [
     { href: '#about', label: t.nav.about },
@@ -167,63 +158,17 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-        onClick={() => setIsMenuOpen(false)}
+
+
+      <MobileMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        navItems={navItems}
+        activeSection={activeSection}
+        onNavClick={handleNavClick}
+        brandName={t.footer.brand}
+        bookingLabel={t.nav.booking}
       />
-
-      {/* Mobile Menu Panel */}
-      <div
-        id="mobile-menu"
-        className={`fixed top-0 right-0 h-full w-72 bg-white z-50 md:hidden transform transition-transform duration-300 ease-out shadow-2xl ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        aria-hidden={!isMenuOpen}
-      >
-        <div className="flex flex-col h-full">
-          {/* Menu Header */}
-          <div className="flex items-center justify-between p-4 border-b">
-            <span className="text-lg font-bold bg-gradient-to-r from-amber-600 via-[#fbbf5d] to-orange-600 bg-clip-text text-transparent">
-              {t.footer.brand}
-            </span>
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="p-2 text-gray-600 hover:text-amber-600 transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
-          </div>
-
-          {/* Menu Items */}
-          <nav className="flex-1 py-4">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`block px-6 py-3 font-medium transition-colors ${activeSection === item.href
-                  ? 'bg-amber-50 text-amber-600'
-                  : 'text-gray-700 hover:bg-amber-50 hover:text-amber-600'
-                  }`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Menu Footer with CTA */}
-          <div className="p-4 border-t">
-            <a
-              href="#booking"
-              onClick={(e) => handleNavClick(e, '#booking')}
-              className="block w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-full text-center hover:from-amber-600 hover:to-orange-600 transition-all"
-            >
-              {t.nav.booking}
-            </a>
-          </div>
-        </div>
-      </div>
     </>
   );
 }

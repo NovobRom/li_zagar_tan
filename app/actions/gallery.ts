@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import { fileUploadSchema } from '@/app/lib/validation';
 import { validateMagicBytes, logAction, checkRateLimit } from '@/app/lib/security';
 import { ActionResult, success, failure } from '@/app/lib/actions';
+import { InsertTables, Tables } from '@/app/types/database';
 
 export async function uploadPhoto(formData: FormData): Promise<ActionResult> {
     const supabase = await createClient();
@@ -65,15 +66,15 @@ export async function uploadPhoto(formData: FormData): Promise<ActionResult> {
         .getPublicUrl(filePath);
 
     // 3. Insert into Table
-    const { error: dbError } = await supabase
-        .from('gallery')
-        .insert([
-            {
-                image_url: publicUrl,
-                storage_path: filePath,
-                created_at: new Date().toISOString(),
-            },
-        ] as any);
+    const newPhoto: InsertTables<'gallery'> = {
+        image_url: publicUrl,
+        storage_path: filePath,
+        created_at: new Date().toISOString(),
+    };
+
+    const { error: dbError } = await (supabase
+        .from('gallery') as any)
+        .insert([newPhoto]);
 
     if (dbError) {
         return failure(`Database error: ${dbError.message}`);
@@ -92,7 +93,7 @@ export async function uploadPhoto(formData: FormData): Promise<ActionResult> {
     return success();
 }
 
-export async function deletePhoto(id: number, storagePath: string): Promise<ActionResult> {
+export async function deletePhoto(id: number | string, storagePath: string): Promise<ActionResult> {
     const supabase = await createClient();
 
     // Auth check
@@ -108,8 +109,8 @@ export async function deletePhoto(id: number, storagePath: string): Promise<Acti
     }
 
     // 1. Get photo details to verify ownership/path
-    const { data: photo, error: fetchError } = await supabase
-        .from('gallery')
+    const { data: photo, error: fetchError } = await (supabase
+        .from('gallery') as any)
         .select('storage_path')
         .eq('id', id)
         .single();
@@ -118,16 +119,14 @@ export async function deletePhoto(id: number, storagePath: string): Promise<Acti
         return failure('Photo not found');
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if ((photo as any).storage_path !== storagePath) {
+    if (photo.storage_path !== storagePath) {
         return failure('Invalid storage path provided');
     }
 
     // 2. Delete from Storage
     const { error: storageError } = await supabase.storage
         .from('gallery')
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .remove([(photo as any).storage_path]);
+        .remove([photo.storage_path!]);
 
     if (storageError) {
         return failure(`Storage delete failed: ${storageError.message}`);
@@ -162,7 +161,8 @@ export async function getPhotos() {
         .from('gallery')
         .select('*')
         .order('display_order', { ascending: true })
-        .order('created_at', { ascending: false });
+        .order('created_at', { ascending: false })
+        .returns<Tables<'gallery'>[]>();
 
     return data || [];
 }

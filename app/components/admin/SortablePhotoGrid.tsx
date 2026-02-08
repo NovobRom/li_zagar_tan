@@ -21,7 +21,7 @@ import { updatePhotosOrder } from '@/app/actions/gallery';
 import { Save } from 'lucide-react';
 
 interface PhotoProps {
-    id: number;
+    id: number | string;
     image_url: string;
     storage_path: string;
     display_order?: number;

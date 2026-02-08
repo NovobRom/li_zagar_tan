@@ -13,8 +13,8 @@ export async function getAuditLogs() {
     const { data: isAdmin } = await supabase.rpc('is_admin');
     if (!isAdmin) redirect('/admin/dashboard');
 
-    const { data } = await (supabase
-        .from('audit_logs') as any)
+    const { data } = await supabase
+        .from('audit_logs')
         .select('*')
         .order('created_at', { ascending: false })
         .limit(100);

@@ -22,6 +22,19 @@ export default async function DashboardPage() {
     const profilePhoto = await getProfilePhoto();
     const heroImage = await getHeroImage();
 
+    const validPhotos = photos
+        .filter(p => p.image_url && p.storage_path)
+        .map(p => ({
+            ...p,
+            image_url: p.image_url!,
+            storage_path: p.storage_path!,
+            display_order: p.display_order ?? undefined
+        }));
+
+    const lastPhotoDate = photos.length > 0 && photos[0].created_at
+        ? new Date(photos[0].created_at).toLocaleDateString()
+        : '—';
+
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Header / Stats Summary */}
@@ -72,7 +85,7 @@ export default async function DashboardPage() {
                             </div>
                             <div className="flex justify-between items-center py-2 border-b border-gray-50">
                                 <span className="text-gray-500 text-sm">Дата последнего фото</span>
-                                <span className="text-sm">{photos.length > 0 ? new Date((photos[0] as any).created_at).toLocaleDateString() : '—'}</span>
+                                <span className="text-sm">{lastPhotoDate}</span>
                             </div>
                         </div>
                     </div>
@@ -89,7 +102,7 @@ export default async function DashboardPage() {
                             <h2 className="text-lg font-semibold text-gray-900">Галерея</h2>
                             <p className="text-xs text-gray-400">Перетащите для изменения порядка</p>
                         </div>
-                        <SortablePhotoGrid initialPhotos={photos as any} />
+                        <SortablePhotoGrid initialPhotos={validPhotos} />
                     </div>
                 </div>
             </div>

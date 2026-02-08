@@ -8,7 +8,7 @@ import { useTransition } from 'react';
 import { deletePhoto } from '@/app/actions/gallery';
 
 interface PhotoProps {
-    id: number;
+    id: number | string;
     image_url: string;
     storage_path: string;
 }

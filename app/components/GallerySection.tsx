@@ -8,7 +8,7 @@ import { blurDataURL } from '@/app/lib/shimmer';
 
 // Define the shape of a gallery item from Supabase
 interface GalleryItem {
-  id: number;
+  id: number | string;
   image_url: string;
   storage_path: string;
   created_at: string;
@@ -24,17 +24,14 @@ export default function GallerySection() {
       try {
         const photos = await getPhotos();
 
-        // Supabase returns object with success/error from our wrapper, 
-        // OR array if we defined getPhotos that way.
-        // Let's check getPhotos implementation:
-        // "return data || []" -> returns array.
-        // Wait, my getPhotos implementation in actions/gallery.ts:
-        // export async function getPhotos() { ... return data || [] }
-        // Yes, it returns an array on success.
+        // Ensure strictly typed items with non-null values where required
+        const validPhotos = (photos || []).filter(p => p.image_url).map(p => ({
+          ...p,
+          image_url: p.image_url!,
+          storage_path: p.storage_path || '',
+        }));
 
-        // However, TS might complain if 'photos' has type issues.
-        // Let's cast it carefully.
-        setGalleryItems(photos as GalleryItem[]);
+        setGalleryItems(validPhotos as GalleryItem[]);
       } catch (error) {
         console.error('Failed to fetch gallery items:', error);
       } finally {
