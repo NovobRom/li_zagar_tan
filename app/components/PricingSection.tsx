@@ -26,7 +26,7 @@ export default function PricingSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-600 via-[#fbbf5d] to-orange-600 bg-clip-text text-transparent mb-3">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
             {t.pricing.title}
           </h2>
           <p className="text-base sm:text-lg text-[#333333] max-w-2xl mx-auto">
@@ -77,10 +77,7 @@ export default function PricingSection() {
                 {/* CTA Button */}
                 <a href="#booking" className="block">
                   <button
-                    className={`w-full py-3 px-6 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 active:scale-[0.98] ${service.popular
-                      ? 'bg-gradient-to-r from-amber-500 via-[#fbbf5d] to-orange-500 text-white shadow-md'
-                      : 'bg-gray-100 text-[#333333] active:bg-gray-200'
-                      }`}
+                    className="w-full py-3 px-6 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 active:scale-[0.98] bg-gradient-to-r from-amber-500 via-[#fbbf5d] to-orange-500 text-white shadow-md"
                   >
                     {t.common.bookNow}
                   </button>
@@ -88,6 +85,21 @@ export default function PricingSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Home Service Note */}
+        <div className="mt-8 sm:mt-10 text-center">
+          <p className="text-[#333333] text-sm sm:text-base max-w-2xl mx-auto">
+            {t.pricing.homeService}{' '}
+            <a
+              href="https://www.instagram.com/li_zagar_tan/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-amber-600 font-medium hover:text-amber-700 transition-colors"
+            >
+              {t.common.instagram}
+            </a>
+          </p>
         </div>
       </div>
     </section>

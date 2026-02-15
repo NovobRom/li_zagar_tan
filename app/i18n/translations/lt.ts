@@ -66,12 +66,14 @@ export const lt: Translations = {
       },
     },
     popular: 'Populiariausias',
+    homeService:
+      'Taip pat teikiame paslaugą namuose. Dėl sąlygų ir kainų kreipkitės per Instagram žinutę.',
   },
 
   // Reviews Section
   reviews: {
     title: 'Klientų atsiliepimai',
-    subtitle: 'Ką sako mūsų klientai',
+    subtitle: '',
     reviewsList: [
       {
         name: 'Greta M.',
@@ -117,6 +119,8 @@ export const lt: Translations = {
     subtitle: 'Jūsų grožio partnerė',
     description:
       'Esu sertifikuota purškiamo įdegio specialistė su aistra tobulam odos atspalviui. Naudoju tik aukščiausios kokybės produktus, kad užtikrinčiau natūralų ir ilgalaikį rezultatą kiekvienai klientei.',
+    procedureDescription:
+      'Profesionali kosmetinė procedūra, kurios metu specialia įranga ant kūno tepamas cukranendrių losjonas, sąveikaujantis su ragininiu odos sluoksniu ir taip suteikiantis odai tamsesnį atspalvį. Atspalvis parenkamas individualiai, atsižvelgiant į jūsų pageidavimus. Vienas seansas atstoja iki 10 soliariamo apsilankymų, užtikrinant tolygų toną ir sveiką odos spindesį.',
     experience: 'Patirtis',
     experienceYears: '2+ metai',
     clients: 'Patenkinti klientai',
@@ -128,5 +132,70 @@ export const lt: Translations = {
       individual: 'Individualus požiūris',
       quality: 'Kokybė',
     },
+  },
+
+  // Safety Section
+  safety: {
+    title: 'Saugumas',
+    intro:
+      'Tai ekologiškiausias būdas gauti nepriekaištingą įdegį, išsaugant odos sveikatą ir jaunystę.',
+    points: [
+      {
+        title: 'Natūrali sudėtis',
+        text: 'Pagrindinis komponentas — cukranendrių ekstraktas (DHA). Tai natūrali organinė medžiaga, oficialiai pripažinta saugia visame pasaulyje (FDA, SCCS).',
+      },
+      {
+        title: 'Paviršinis poveikis',
+        text: 'Losjonas sąveikauja tik su viršutiniu (raginiu) odos sluoksniu, kuris sudarytas iš negyvų ląstelių, neįsiskverbdamas gilyn ir nepatekdamas į kraujotaką.',
+      },
+      {
+        title: 'Jokio ultravioleto',
+        text: 'Procedūra visiškai pašalina nudegimų ir fotosenatvinimo riziką. Įdegis gaunamas nepažeidžiant odos ląstelių DNR.',
+      },
+      {
+        title: 'Universalumas',
+        text: 'Dėl švelnus poveikio procedūra leidžiama turinčioms jautrią odą, taip pat nėštumo ir laktacijos metu.',
+      },
+    ],
+  },
+
+  // Preparation Section
+  preparation: {
+    title: 'Pasiruošimas ir priežiūra',
+    beforeTitle: 'Pasiruošimas (24 val. iki procedūros)',
+    beforeItems: [
+      'Kruopščiai nuvalykite odą šveitikliu, pilingu ar kempine.',
+      'Vizito dieną netepkite kremo, dezodoranto ar kvepalų. Oda turi būti absoliučiai švari.',
+      'Atlikite visas higienos procedūras (skutimąsi/depiliaciją) ne vėliau kaip prieš parą.',
+      'Vilkėkite laisvus, tamsios spalvos drabužius, kad netrukdytumėte įdegiui susidaryti.',
+    ],
+    afterTitle: 'Odos priežiūra po procedūros',
+    afterItems: [
+      'Pirmas dušas: maždaug po 8 valandų (individualiai). Nuplaukite losjono perteklių šiltu vandeniu be muilo ir kempinės.',
+      'Drėkinimas — tai pagrindas: iš karto po pirmo dušo pradėkite naudoti lengvą kūno kremą/losjoną, bent 1 kartą per dieną (kuo daugiau, tuo geriau). Atminkite: drėkinimas turi kaupiamąjį efektą ir pratęsia įdegį iki 30%.',
+      'Stenkitės vengti šiurkščių šveitiklių, pirčių, baseinų ir ilgų vonių (kad nesutrumpintumėte efekto trukmės).',
+    ],
+  },
+
+  // Training Section
+  training: {
+    title: 'Mokymai',
+    intro:
+      'Norite įsisavinti paklausią grožio profesiją ir pradėti uždirbti jau pirmą mėnesį?',
+    courseDescription:
+      'Individualūs purškiamo įdegio mokymai nuo nulio iki pasitikėjimo dirbant su klientais.',
+    courseItems: [
+      'teorija suprantama kalba',
+      'išsamus formulių, aparatūros ir technikos aptarimas',
+      'praktika su modeliais',
+      'klaidų analizė',
+      'rekomendacijos dėl paleidimo ir reklamavimo',
+      'asmeninis palaikymas po mokymų',
+    ],
+    outro:
+      'Dalinuosi ne tik tepimo technika, bet ir savo darbo patirtimi industrijoje: tuo, kas tikrai padeda užaugti iki pasitikėjimo savimi lygio meistro.',
+    closingNote:
+      'Jei norite pradėti, mielai padėsiu jums gražiai ir kompetentingai įžengti į šią sritį.',
+    cta: '📩 Dėl išsamios informacijos ir registracijos apsilankykite mano Instagram.',
   },
 };

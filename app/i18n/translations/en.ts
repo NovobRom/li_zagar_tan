@@ -66,12 +66,14 @@ export const en: Translations = {
       },
     },
     popular: 'Most Popular',
+    homeService:
+      'We also offer a home visit service. For details and pricing, please contact us via Instagram DM.',
   },
 
   // Reviews Section
   reviews: {
     title: 'Customer Reviews',
-    subtitle: 'What our clients say',
+    subtitle: '',
     reviewsList: [
       {
         name: 'Anna K.',
@@ -117,6 +119,8 @@ export const en: Translations = {
     subtitle: 'Your beauty partner',
     description:
       'I am a certified spray tan specialist with a passion for the perfect skin tone. I use only the highest quality products to ensure natural and long-lasting results for every client.',
+    procedureDescription:
+      'A professional cosmetic procedure in which a sugarcane-based lotion is applied to the body using specialized equipment. The lotion interacts with the stratum corneum (outermost layer of skin), causing it to darken naturally. The shade is selected individually based on your preferences. One session replaces up to 10 solarium visits, providing an even tone and healthy glow.',
     experience: 'Experience',
     experienceYears: '2+ years',
     clients: 'Happy clients',
@@ -128,5 +132,70 @@ export const en: Translations = {
       individual: 'Individual approach',
       quality: 'Quality',
     },
+  },
+
+  // Safety Section
+  safety: {
+    title: 'Safety',
+    intro:
+      'This is the most eco-friendly way to achieve a flawless tan while preserving the health and youth of your skin.',
+    points: [
+      {
+        title: 'Natural composition',
+        text: 'The main component is sugarcane extract (DHA). It is a natural organic substance officially recognized as safe worldwide (FDA, SCCS).',
+      },
+      {
+        title: 'Surface-level action',
+        text: 'The lotion interacts only with the upper (stratum corneum) layer of skin, which consists of dead cells, without penetrating deeper or entering the bloodstream.',
+      },
+      {
+        title: 'No ultraviolet',
+        text: 'The procedure completely eliminates the risk of burns and photoaging. You get a tan without harming your skin cell DNA.',
+      },
+      {
+        title: 'Universality',
+        text: 'Thanks to its gentle action, the procedure is safe for those with sensitive skin, as well as during pregnancy and breastfeeding.',
+      },
+    ],
+  },
+
+  // Preparation Section
+  preparation: {
+    title: 'Preparation & Aftercare',
+    beforeTitle: 'Preparation (24 hours before the procedure)',
+    beforeItems: [
+      'Thoroughly cleanse your skin with a scrub, peeling, or washcloth.',
+      'On the day of your visit, do not apply cream, deodorant, or perfume. Skin must be absolutely clean.',
+      'Complete all grooming procedures (shaving/waxing) at least 24 hours in advance.',
+      'Wear loose, dark clothing so as not to hinder the tan development.',
+    ],
+    afterTitle: 'Skin care after the procedure',
+    afterItems: [
+      'First shower: approximately 8 hours later (individual). Rinse off excess lotion with warm water without soap or washcloth.',
+      'Moisturizing is key: start using a light body cream/lotion immediately after your first shower, at least once a day (the more, the better). Remember: moisturizing has a cumulative effect and prolongs the tan by up to 30%.',
+      'Try to avoid harsh scrubs, saunas, swimming pools, and long baths (to maintain the effect duration).',
+    ],
+  },
+
+  // Training Section
+  training: {
+    title: 'Training',
+    intro:
+      'Want to master an in-demand beauty profession and start earning in your first month?',
+    courseDescription:
+      'Individual spray tan training from scratch to confident practice with clients.',
+    courseItems: [
+      'theory in simple terms',
+      'detailed breakdown of formulas, equipment and techniques',
+      'practice on models',
+      'error analysis',
+      'recommendations for launching and promotion',
+      'personal support after training',
+    ],
+    outro:
+      'I share not just the application technique, but my industry experience — what truly helps you grow into a confident professional.',
+    closingNote:
+      'If you want to get started, I would be happy to help you enter this field beautifully and professionally.',
+    cta: '📩 For detailed information and enrollment, visit my Instagram.',
   },
 };

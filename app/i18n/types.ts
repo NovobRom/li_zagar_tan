@@ -11,6 +11,11 @@ export interface ServiceTranslation {
   duration: string;
 }
 
+export interface SafetyPoint {
+  title: string;
+  text: string;
+}
+
 export interface Translations {
   nav: {
     about: string;
@@ -53,6 +58,7 @@ export interface Translations {
       bioPeeling: ServiceTranslation;
     };
     popular: string;
+    homeService: string;
   };
   reviews: {
     title: string;
@@ -79,6 +85,7 @@ export interface Translations {
     title: string;
     subtitle: string;
     description: string;
+    procedureDescription: string;
     experience: string;
     experienceYears: string;
     clients: string;
@@ -90,5 +97,26 @@ export interface Translations {
       individual: string;
       quality: string;
     };
+  };
+  safety: {
+    title: string;
+    intro: string;
+    points: SafetyPoint[];
+  };
+  preparation: {
+    title: string;
+    beforeTitle: string;
+    beforeItems: string[];
+    afterTitle: string;
+    afterItems: string[];
+  };
+  training: {
+    title: string;
+    intro: string;
+    courseDescription: string;
+    courseItems: string[];
+    outro: string;
+    closingNote: string;
+    cta: string;
   };
 }

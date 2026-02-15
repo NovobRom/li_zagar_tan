@@ -69,7 +69,7 @@ export default function AboutSection() {
           <div className="order-2 lg:order-2 space-y-6">
             {/* Header */}
             <div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-amber-600 via-[#fbbf5d] to-orange-600 bg-clip-text text-transparent mb-2">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
                 {t.about.title}
               </h2>
               <p className="text-lg sm:text-xl text-gray-700 font-medium">
@@ -80,6 +80,11 @@ export default function AboutSection() {
             {/* Description */}
             <p className="text-[#333333] leading-relaxed text-base sm:text-lg">
               {t.about.description}
+            </p>
+
+            {/* Procedure Description */}
+            <p className="text-[#333333] leading-relaxed text-base sm:text-lg">
+              {t.about.procedureDescription}
             </p>
 
             {/* Stats */}
