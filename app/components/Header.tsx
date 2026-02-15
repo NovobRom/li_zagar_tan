@@ -93,13 +93,16 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <a
-              href="#hero"
-              onClick={(e) => handleNavClick(e, '#hero')}
-              className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-amber-600 via-[#fbbf5d] to-orange-600 bg-clip-text text-transparent"
-            >
-              {t.footer.brand}
-            </a>
+            <div className="flex flex-col">
+              <a
+                href="#hero"
+                onClick={(e) => handleNavClick(e, '#hero')}
+                className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-amber-600 via-[#fbbf5d] to-orange-600 bg-clip-text text-transparent"
+              >
+                {t.footer.brand}
+              </a>
+              <span className="text-[10px] sm:text-xs text-gray-400 font-medium">Developed by Roman Novobranets</span>
+            </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6 lg:gap-8">

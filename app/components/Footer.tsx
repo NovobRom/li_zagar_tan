@@ -13,12 +13,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="text-center sm:text-left">
-            <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-amber-300 via-[#fbbf5d] to-orange-300 bg-clip-text text-transparent mb-3">
-              {t.footer.brand}
-            </h3>
-            <p className="text-gray-400 text-sm sm:text-base mb-3">
-              {t.footer.tagline}
-            </p>
+            <h4 className="text-base sm:text-lg font-semibold text-white mb-3">{t.footer.tagline}</h4>
             <div className="flex items-center justify-center sm:justify-start gap-2 text-gray-400 text-sm">
               <span className="text-[#fbbf5d]">★★★★★</span>
               <span>{t.common.rating}</span>
@@ -27,7 +22,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="text-center sm:text-left">
-            <h4 className="text-base sm:text-lg font-semibold mb-3">{t.footer.contact}</h4>
+            <h4 className="text-base sm:text-lg font-semibold text-white mb-3">{t.footer.contact}</h4>
             <div className="space-y-2">
               <a
                 href="https://maps.google.com/?q=A.+Goštauto+g.+8,+Vilnius,+Lithuania"
@@ -47,7 +42,7 @@ export default function Footer() {
 
           {/* Social */}
           <div className="text-center sm:text-left sm:col-span-2 lg:col-span-1">
-            <h4 className="text-base sm:text-lg font-semibold mb-3">{t.footer.followUs}</h4>
+            <h4 className="text-base sm:text-lg font-semibold text-white mb-3">{t.footer.followUs}</h4>
             <div className="flex flex-col items-center sm:items-start gap-4">
               <a
                 href="https://www.instagram.com/li_zagar_tan/"
@@ -79,7 +74,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-8 pt-6 text-center text-gray-500 text-xs sm:text-sm">
+        <div className="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400 text-xs sm:text-sm">
           <p>© {currentYear} {t.footer.brand}. {t.footer.rights}.</p>
         </div>
       </div>
