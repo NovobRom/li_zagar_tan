@@ -82,10 +82,7 @@ export default function AboutSection() {
               {t.about.description}
             </p>
 
-            {/* Procedure Description */}
-            <p className="text-[#333333] leading-relaxed text-base sm:text-lg">
-              {t.about.procedureDescription}
-            </p>
+
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4">

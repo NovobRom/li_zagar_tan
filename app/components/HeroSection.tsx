@@ -114,6 +114,11 @@ export default function HeroSection({ heroImageUrl }: { heroImageUrl: string | n
                   </a>
                 </p>
               </div>
+
+              {/* Procedure Description */}
+              <p className="text-[#333333] leading-relaxed text-sm sm:text-base">
+                {t.about.procedureDescription}
+              </p>
             </div>
           </div>
         </div>
