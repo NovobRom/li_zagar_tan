@@ -20,6 +20,9 @@ export interface Translations {
   nav: {
     about: string;
     gallery: string;
+    safety: string;
+    preparation: string;
+    training: string;
     pricing: string;
     reviews: string;
     booking: string;

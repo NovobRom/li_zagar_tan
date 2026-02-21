@@ -5,6 +5,9 @@ export const ru: Translations = {
   nav: {
     about: 'Обо мне',
     gallery: 'Галерея',
+    safety: 'Безопасность',
+    preparation: 'Подготовка и Уход',
+    training: 'Обучение',
     pricing: 'Цены',
     reviews: 'Отзывы',
     booking: 'Записаться',

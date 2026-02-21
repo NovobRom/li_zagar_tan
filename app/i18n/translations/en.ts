@@ -5,6 +5,9 @@ export const en: Translations = {
   nav: {
     about: 'About Me',
     gallery: 'Gallery',
+    safety: 'Safety',
+    preparation: 'Preparation & Aftercare',
+    training: 'Training',
     pricing: 'Pricing',
     reviews: 'Reviews',
     booking: 'Book Now',

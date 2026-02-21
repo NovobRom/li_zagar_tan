@@ -5,6 +5,9 @@ export const lt: Translations = {
   nav: {
     about: 'Apie mane',
     gallery: 'Galerija',
+    safety: 'Saugumas',
+    preparation: 'Pasiruošimas ir priežiūra',
+    training: 'Mokymai',
     pricing: 'Kainos',
     reviews: 'Atsiliepimai',
     booking: 'Registracija',

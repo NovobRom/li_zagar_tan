@@ -38,7 +38,7 @@ export default function MobileMenu({
         <>
             {/* Mobile Menu Overlay */}
             <div
-                className={`fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                className={`fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
                     }`}
                 onClick={onClose}
             />
@@ -46,7 +46,7 @@ export default function MobileMenu({
             {/* Mobile Menu Panel */}
             <div
                 id="mobile-menu"
-                className={`fixed top-0 right-0 h-full w-72 bg-white z-50 md:hidden transform transition-transform duration-300 ease-out shadow-2xl ${isOpen ? 'translate-x-0' : 'translate-x-full'
+                className={`fixed top-0 right-0 h-full w-72 bg-white z-50 lg:hidden transform transition-transform duration-300 ease-out shadow-2xl ${isOpen ? 'translate-x-0' : 'translate-x-full'
                     }`}
                 aria-hidden={!isOpen}
             >
@@ -72,8 +72,8 @@ export default function MobileMenu({
                                 href={item.href}
                                 onClick={(e) => onNavClick(e, item.href)}
                                 className={`block px-6 py-3 font-medium transition-colors ${activeSection === item.href
-                                        ? 'bg-amber-50 text-amber-600'
-                                        : 'text-gray-700 hover:bg-amber-50 hover:text-amber-600'
+                                    ? 'bg-amber-50 text-amber-600'
+                                    : 'text-gray-700 hover:bg-amber-50 hover:text-amber-600'
                                     }`}
                             >
                                 {item.label}

@@ -46,7 +46,7 @@ export default function Header() {
   // Close menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 1024) {
         setIsMenuOpen(false);
       }
     };
@@ -59,8 +59,10 @@ export default function Header() {
   const navItems = [
     { href: '#about', label: t.nav.about },
     { href: '#gallery', label: t.nav.gallery },
+    { href: '#safety', label: t.nav.safety },
+    { href: '#preparation', label: t.nav.preparation },
+    { href: '#training', label: t.nav.training },
     { href: '#pricing', label: t.nav.pricing },
-    { href: '#reviews', label: t.nav.reviews },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -101,17 +103,17 @@ export default function Header() {
               >
                 {t.footer.brand}
               </a>
-              <span className="text-[10px] sm:text-xs text-gray-400 font-medium">Developed by Roman Novobranets</span>
+              <span className="hidden xl:inline-block text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">Developed by Roman Novobranets</span>
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+            <nav className="hidden lg:flex items-center gap-4 xl:gap-7">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`font-medium transition-colors text-sm lg:text-base ${activeSection === item.href
+                  className={`whitespace-nowrap font-medium transition-colors text-[14px] xl:text-[15px] ${activeSection === item.href
                     ? 'text-amber-600'
                     : 'text-gray-600 hover:text-amber-600'
                     }`}
@@ -122,7 +124,7 @@ export default function Header() {
               <a
                 href="#booking"
                 onClick={(e) => handleNavClick(e, '#booking')}
-                className="px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-full text-sm lg:text-base hover:from-amber-600 hover:to-orange-600 transition-all"
+                className="whitespace-nowrap px-4 py-1.5 xl:py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-full text-[14px] xl:text-[15px] hover:from-amber-600 hover:to-orange-600 transition-all"
               >
                 {t.nav.booking}
               </a>
@@ -149,7 +151,7 @@ export default function Header() {
               {/* Hamburger Menu Button - Mobile only */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 text-gray-600 hover:text-amber-600 transition-colors"
+                className="lg:hidden p-2 text-gray-600 hover:text-amber-600 transition-colors"
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isMenuOpen}
                 aria-controls="mobile-menu"
