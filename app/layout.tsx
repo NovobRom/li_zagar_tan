@@ -84,6 +84,9 @@ export async function generateMetadata(): Promise<Metadata> {
         'en-US': '/?lang=en',
       },
     },
+    verification: {
+      google: 'rJgAur9VJpeBY4EuOZf1U41F4dehA65a37L_5nPXuV8',
+    },
   };
 }
 
