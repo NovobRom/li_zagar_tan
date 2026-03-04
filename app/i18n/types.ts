@@ -123,4 +123,9 @@ export interface Translations {
     closingNote: string;
     cta: string;
   };
+  cookieConsent: {
+    message: string;
+    accept: string;
+    decline: string;
+  };
 }

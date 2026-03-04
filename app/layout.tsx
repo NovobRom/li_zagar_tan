@@ -3,8 +3,9 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { LanguageProvider } from './context/LanguageContext';
 import StructuredData from './components/StructuredData';
-import { GoogleAnalytics } from '@next/third-parties/google';
 import Script from 'next/script';
+import CookieConsent from './components/CookieConsent';
+import GoogleAnalyticsWrapper from './components/GoogleAnalyticsWrapper';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -104,10 +105,13 @@ export default async function RootLayout({
         <StructuredData />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <LanguageProvider defaultLanguage={lang as any}>{children}</LanguageProvider>
+        <LanguageProvider defaultLanguage={lang as any}>
+          {children}
+          <CookieConsent />
+        </LanguageProvider>
 
-        {/* Google Analytics */}
-        <GoogleAnalytics gaId="G-23N94VFY9M" />
+        {/* Google Analytics — loads only after cookie consent */}
+        <GoogleAnalyticsWrapper />
 
         {/* Meta Pixel - Replace with actual Pixel ID */}
         {process.env.NEXT_PUBLIC_FB_PIXEL_ID && (

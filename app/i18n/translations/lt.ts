@@ -207,4 +207,11 @@ export const lt: Translations = {
       'Jei norite pradėti, mielai padėsiu jums gražiai ir kompetentingai įžengti į šią sritį.',
     cta: '📩 Dėl išsamios informacijos ir registracijos apsilankykite mano Instagram.',
   },
+
+  // Cookie Consent
+  cookieConsent: {
+    message: 'Šioje svetainėje naudojami slapukai, kad galėtume analizuoti lankymąsi ir pagerinti jūsų patirtį.',
+    accept: 'Sutinku',
+    decline: 'Nesutinku',
+  },
 };

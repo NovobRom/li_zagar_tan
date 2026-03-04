@@ -207,4 +207,11 @@ export const en: Translations = {
       'If you want to get started, I would be happy to help you enter this field beautifully and professionally.',
     cta: '📩 For detailed information and enrollment, visit my Instagram.',
   },
+
+  // Cookie Consent
+  cookieConsent: {
+    message: 'This website uses cookies to analyze traffic and improve your experience.',
+    accept: 'Accept',
+    decline: 'Decline',
+  },
 };
