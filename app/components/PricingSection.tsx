@@ -43,7 +43,7 @@ export default function PricingSection() {
           {services.map((service, index) => (
             <div
               key={index}
-              className={`relative bg-white rounded-2xl sm:rounded-3xl shadow-lg overflow-hidden ${service.popular ? 'ring-2 ring-amber-500' : ''
+              className={`relative bg-white rounded-2xl sm:rounded-3xl shadow-lg overflow-hidden flex flex-col ${service.popular ? 'ring-2 ring-amber-500' : ''
                 }`}
               aria-label={`${service.name} service, price ${service.price}, duration ${service.duration}`}
             >
@@ -54,7 +54,7 @@ export default function PricingSection() {
                 </div>
               )}
 
-              <div className="p-5 sm:p-6 lg:p-8">
+              <div className="p-5 sm:p-6 lg:p-8 flex flex-col flex-1">
                 {/* Service Name */}
                 <h3 className="text-lg sm:text-xl font-bold text-[#171717] mb-2 pr-16 sm:pr-0">
                   {service.name}
@@ -79,7 +79,7 @@ export default function PricingSection() {
                 </div>
 
                 {/* CTA Button */}
-                <a href="#booking" className="block">
+                <a href="#booking" className="block mt-auto">
                   <button
                     className="w-full py-3 px-6 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 active:scale-[0.98] bg-gradient-to-r from-amber-500 via-[#fbbf5d] to-orange-500 text-white shadow-md"
                   >
