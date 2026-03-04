@@ -69,7 +69,7 @@ const metadataByLanguage = {
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
   const lang = (cookieStore.get('language')?.value || 'lt') as keyof typeof metadataByLanguage;
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://li-zagar-tan.vercel.app';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.lizagartan.com';
 
   const metadata = metadataByLanguage[lang] || metadataByLanguage['lt'];
 

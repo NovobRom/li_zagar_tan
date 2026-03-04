@@ -2,49 +2,49 @@
 
 Landing page for **li_zagar_tan** — a professional spray tan studio in Vilnius.
 
-> 🌐 **Production:** [li-zagar-tan.vercel.app](https://li-zagar-tan.vercel.app)
+> 🌐 **Production:** [www.lizagartan.com](https://www.lizagartan.com)
 
 ---
 
 ## 🛠 Tech Stack
 
-| Category | Technology | Version |
-|----------|-----------|---------|
-| **Framework** | [Next.js](https://nextjs.org/) (App Router) | 16.1.6 |
-| **UI Library** | [React](https://react.dev/) | 19.2.3 |
-| **Language** | [TypeScript](https://www.typescriptlang.org/) | ^5 |
-| **Styling** | [Tailwind CSS](https://tailwindcss.com/) | ^4 |
-| **Fonts** | [Geist Sans & Geist Mono](https://vercel.com/font) (via `next/font`) | — |
-| **Icons** | [Lucide React](https://lucide.dev/) | ^0.563.0 |
-| **Database / Storage** | [Supabase](https://supabase.com/) (Storage, Auth) | ^2.93.3 |
-| **Validation** | [Zod](https://zod.dev/) | ^4.3.6 |
-| **Drag & Drop** | [@dnd-kit](https://dndkit.com/) | ^6.3.1 |
-| **File Upload** | [react-dropzone](https://react-dropzone.js.org/) | ^14.4.0 |
-| **Image Cropper** | [react-easy-crop](https://github.com/ValentinH/react-easy-crop) | ^5.5.6 |
-| **Deployment** | [Vercel](https://vercel.com/) | — |
+| Category               | Technology                                                           | Version  |
+| ---------------------- | -------------------------------------------------------------------- | -------- |
+| **Framework**          | [Next.js](https://nextjs.org/) (App Router)                          | 16.1.6   |
+| **UI Library**         | [React](https://react.dev/)                                          | 19.2.3   |
+| **Language**           | [TypeScript](https://www.typescriptlang.org/)                        | ^5       |
+| **Styling**            | [Tailwind CSS](https://tailwindcss.com/)                             | ^4       |
+| **Fonts**              | [Geist Sans & Geist Mono](https://vercel.com/font) (via `next/font`) | —        |
+| **Icons**              | [Lucide React](https://lucide.dev/)                                  | ^0.563.0 |
+| **Database / Storage** | [Supabase](https://supabase.com/) (Storage, Auth)                    | ^2.93.3  |
+| **Validation**         | [Zod](https://zod.dev/)                                              | ^4.3.6   |
+| **Drag & Drop**        | [@dnd-kit](https://dndkit.com/)                                      | ^6.3.1   |
+| **File Upload**        | [react-dropzone](https://react-dropzone.js.org/)                     | ^14.4.0  |
+| **Image Cropper**      | [react-easy-crop](https://github.com/ValentinH/react-easy-crop)      | ^5.5.6   |
+| **Deployment**         | [Vercel](https://vercel.com/)                                        | —        |
 
 ### Dev Tools
 
-| Tool | Purpose |
-|------|---------|
-| ESLint | Code linting |
-| Prettier | Code formatting |
+| Tool                | Purpose          |
+| ------------------- | ---------------- |
+| ESLint              | Code linting     |
+| Prettier            | Code formatting  |
 | Husky + lint-staged | Pre-commit hooks |
-| Vitest | Unit testing |
+| Vitest              | Unit testing     |
 
 ---
 
 ## 🎨 Brand Colors
 
-| Color | HEX | Usage |
-|-------|-----|-------|
-| ⚫ Black | `#0a0a0a` | Background (dark mode), header |
-| ⚪ White | `#ffffff` | Background (light mode) |
-| 🟡 Premium Gold | `#fbbf5d` | Accent color, CTA elements, focus states |
-| 🟡 Tailwind Gold | `#FFD700` | Secondary gold |
-| ⬛ Foreground | `#171717` | Headings (light mode) |
-| 🔘 Text Body | `#333333` | Body text (light mode) |
-| 🔘 Text Muted | `#9ca3af` | Muted text (light mode) |
+| Color           | HEX       | Usage                                    |
+| --------------- | --------- | ---------------------------------------- |
+| ⚫ Black         | `#0a0a0a` | Background (dark mode), header           |
+| ⚪ White         | `#ffffff` | Background (light mode)                  |
+| 🟡 Premium Gold  | `#fbbf5d` | Accent color, CTA elements, focus states |
+| 🟡 Tailwind Gold | `#FFD700` | Secondary gold                           |
+| ⬛ Foreground    | `#171717` | Headings (light mode)                    |
+| 🔘 Text Body     | `#333333` | Body text (light mode)                   |
+| 🔘 Text Muted    | `#9ca3af` | Muted text (light mode)                  |
 
 > The site supports **dark theme** via `prefers-color-scheme: dark`.
 
@@ -165,15 +165,15 @@ npm start
 
 ### Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server |
-| `npm run build` | Production build |
-| `npm start` | Start production server |
-| `npm run lint` | Run linter |
-| `npm run lint:fix` | Auto-fix lint errors |
+| Command              | Description              |
+| -------------------- | ------------------------ |
+| `npm run dev`        | Start dev server         |
+| `npm run build`      | Production build         |
+| `npm start`          | Start production server  |
+| `npm run lint`       | Run linter               |
+| `npm run lint:fix`   | Auto-fix lint errors     |
 | `npm run type-check` | TypeScript type checking |
-| `npm run format` | Format code (Prettier) |
+| `npm run format`     | Format code (Prettier)   |
 
 ---
 
