@@ -58,6 +58,7 @@ export interface Translations {
     services: {
       fullBody: ServiceTranslation;
       legs: ServiceTranslation;
+      contouring: ServiceTranslation;
       bioPeeling: ServiceTranslation;
     };
     popular: string;

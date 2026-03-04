@@ -16,6 +16,10 @@ export default function PricingSection() {
       popular: false,
     },
     {
+      ...t.pricing.services.contouring,
+      popular: false,
+    },
+    {
       ...t.pricing.services.bioPeeling,
       popular: false,
     },
@@ -35,11 +39,11 @@ export default function PricingSection() {
         </div>
 
         {/* Pricing Cards - Stack on mobile */}
-        <div className="grid gap-4 sm:gap-6 lg:grid-cols-3 lg:gap-8 max-w-lg mx-auto lg:max-w-none">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-lg mx-auto sm:max-w-none">
           {services.map((service, index) => (
             <div
               key={index}
-              className={`relative bg-white rounded-2xl sm:rounded-3xl shadow-lg overflow-hidden ${service.popular ? 'ring-2 ring-amber-500 lg:scale-105' : ''
+              className={`relative bg-white rounded-2xl sm:rounded-3xl shadow-lg overflow-hidden ${service.popular ? 'ring-2 ring-amber-500' : ''
                 }`}
               aria-label={`${service.name} service, price ${service.price}, duration ${service.duration}`}
             >

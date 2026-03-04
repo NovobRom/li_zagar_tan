@@ -61,6 +61,12 @@ export const lt: Translations = {
         price: 20,
         duration: '20 min',
       },
+      contouring: {
+        name: 'Kontūravimas',
+        description: 'Pabrėžia kūno reljefą ir vizualiai lieknina figūrą',
+        price: 10,
+        duration: '15 min',
+      },
       bioPeeling: {
         name: 'Biopilingas',
         description: 'Paruošia odą tobulam įdegiui',

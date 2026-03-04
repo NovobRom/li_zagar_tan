@@ -61,6 +61,12 @@ export const ru: Translations = {
         price: 20,
         duration: '20 мин',
       },
+      contouring: {
+        name: 'Контуринг',
+        description: 'Подчёркивает рельеф тела и визуально стройнит фигуру',
+        price: 10,
+        duration: '15 мин',
+      },
       bioPeeling: {
         name: 'Биопилинг',
         description: 'Подготовит кожу к идеальному загару',

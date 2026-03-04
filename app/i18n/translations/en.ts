@@ -61,6 +61,12 @@ export const en: Translations = {
         price: 20,
         duration: '20 min',
       },
+      contouring: {
+        name: 'Contouring',
+        description: 'Highlights body contours and visually slims the figure',
+        price: 10,
+        duration: '15 min',
+      },
       bioPeeling: {
         name: 'Bio Peeling',
         description: 'Prepares your skin for the perfect tan',

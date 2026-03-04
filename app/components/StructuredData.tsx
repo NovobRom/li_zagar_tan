@@ -1,13 +1,15 @@
 'use client';
 
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://li-zagar-tan.vercel.app';
+
 export default function StructuredData() {
     const structuredData = {
         '@context': 'https://schema.org',
         '@type': 'BeautySalon',
         'name': 'li_zagar_tan',
-        'image': 'https://li-zagar-tan.vercel.app/og-image.jpg', // Placeholder
-        '@id': 'https://li-zagar-tan.vercel.app',
-        'url': 'https://li-zagar-tan.vercel.app',
+        'image': `${baseUrl}/og-image.jpg`, // Placeholder
+        '@id': baseUrl,
+        'url': baseUrl,
 
         'address': {
             '@type': 'PostalAddress',
