@@ -22,7 +22,7 @@ const metadataByLanguage = {
   lt: {
     title: 'li_zagar_tan | Purškiamas įdegis Vilniuje',
     description: 'Profesionalus purškiamas įdegis (spray tan) Vilniuje. Saugus, natūralus rezultatas per 30 minučių. Efektas išlieka 7-10 dienų. Registracija per Treatwell.',
-    keywords: 'purškiamas įdegis, spray tan, Vilnius, li_zagar_tan',
+    keywords: 'purškiamas įdegis, spray tan, Vilnius, li_zagar_tan, li-zagar-tan, lizagartan, лизагартан, ли загар тан',
     openGraph: {
       title: 'li_zagar_tan | Purškiamas įdegis Vilniuje',
       description: 'Profesionalus purškiamas įdegis per 30 minučių. Efektas išlieka 7-10 dienų.',
@@ -37,7 +37,7 @@ const metadataByLanguage = {
   ru: {
     title: 'li_zagar_tan | Моментальный загар в Вильнюсе',
     description: 'Профессиональный моментальный загар (spray tan) в Вильнюсе. Безопасный, натуральный результат за 30 минут. Эффект 7-10 дней. Запись через Treatwell.',
-    keywords: 'spray tan, моментальный загар, purškiamas įdegis, Vilnius, Вильнюс, li_zagar_tan',
+    keywords: 'spray tan, моментальный загар, purškiamas įdegis, Vilnius, Вильнюс, li_zagar_tan, li-zagar-tan, lizagartan, лизагартан, ли загар тан',
     openGraph: {
       title: 'li_zagar_tan | Моментальный загар в Вильнюсе',
       description: 'Профессиональный моментальный загар за 30 минут. Эффект 7-10 дней.',
@@ -52,7 +52,7 @@ const metadataByLanguage = {
   en: {
     title: 'li_zagar_tan | Spray Tan in Vilnius',
     description: 'Professional spray tan in Vilnius. Safe, natural result in 30 minutes. Effect lasts 7-10 days. Book via Treatwell.',
-    keywords: 'spray tan, Vilnius, li_zagar_tan, tanning',
+    keywords: 'spray tan, Vilnius, li_zagar_tan, tanning, li-zagar-tan, lizagartan, лизагартан, ли загар тан',
     openGraph: {
       title: 'li_zagar_tan | Spray Tan in Vilnius',
       description: 'Professional spray tan in 30 minutes. Effect lasts 7-10 days.',
