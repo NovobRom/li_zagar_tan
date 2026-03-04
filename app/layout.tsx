@@ -106,10 +106,8 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <LanguageProvider defaultLanguage={lang as any}>{children}</LanguageProvider>
 
-        {/* Google Analytics - Replace with actual Measurement ID */}
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-        )}
+        {/* Google Analytics */}
+        <GoogleAnalytics gaId="G-23N94VFY9M" />
 
         {/* Meta Pixel - Replace with actual Pixel ID */}
         {process.env.NEXT_PUBLIC_FB_PIXEL_ID && (

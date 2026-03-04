@@ -103,7 +103,6 @@ export default function Header() {
               >
                 {t.footer.brand}
               </a>
-              <span className="hidden xl:inline-block text-[10px] sm:text-xs text-gray-400 font-medium mt-0.5">Developed by Roman Novobranets</span>
             </div>
 
             {/* Desktop Navigation */}
