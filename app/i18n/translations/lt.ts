@@ -27,7 +27,7 @@ export const lt: Translations = {
 
   // Hero Section
   hero: {
-    title: 'Tobulas įdegis per 30 minučių',
+    title: 'Tobulas įdegis per 20 minučių',
     subtitle: 'Saugus, natūralus ir ilgalaikis purškiamas įdegis Vilniuje',
     features: {
       duration: 'Efektas 7-10 dienų',

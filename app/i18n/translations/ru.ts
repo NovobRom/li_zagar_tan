@@ -27,7 +27,7 @@ export const ru: Translations = {
 
   // Hero Section
   hero: {
-    title: 'Идеальный загар за 30 минут',
+    title: 'Идеальный загар за 20 минут',
     subtitle: 'Безопасный, натуральный и стойкий моментальный загар в Вильнюсе',
     features: {
       duration: 'Эффект 7-10 дней',

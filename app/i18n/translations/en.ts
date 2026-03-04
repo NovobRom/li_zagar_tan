@@ -27,7 +27,7 @@ export const en: Translations = {
 
   // Hero Section
   hero: {
-    title: 'Perfect Tan in 30 Minutes',
+    title: 'Perfect Tan in 20 Minutes',
     subtitle: 'Safe, natural and long-lasting spray tan in Vilnius',
     features: {
       duration: 'Lasts 7-10 days',
