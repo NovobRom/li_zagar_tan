@@ -53,13 +53,13 @@ export const lt: Translations = {
         name: 'Purškiamas įdegis visam kūnui',
         description: 'Tolygus, natūralus įdegis visam kūnui',
         price: 40,
-        duration: '30 min',
+        duration: '20 min',
       },
       legs: {
         name: 'Purškiamas įdegis kojoms',
         description: 'Idealus vasarai ir specialioms progoms',
         price: 20,
-        duration: '20 min',
+        duration: '15 min',
       },
       contouring: {
         name: 'Kontūravimas',

@@ -53,13 +53,13 @@ export const ru: Translations = {
         name: 'Загар (всё тело)',
         description: 'Равномерный, натуральный загар на всё тело',
         price: 40,
-        duration: '30 мин',
+        duration: '20 мин',
       },
       legs: {
         name: 'Загар (ноги)',
         description: 'Идеально для лета и особых случаев',
         price: 20,
-        duration: '20 мин',
+        duration: '15 мин',
       },
       contouring: {
         name: 'Контуринг',

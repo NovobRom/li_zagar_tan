@@ -53,13 +53,13 @@ export const en: Translations = {
         name: 'Full Body Spray Tan',
         description: 'Even, natural tan for your entire body',
         price: 40,
-        duration: '30 min',
+        duration: '20 min',
       },
       legs: {
         name: 'Legs Only Spray Tan',
         description: 'Perfect for summer and special occasions',
         price: 20,
-        duration: '20 min',
+        duration: '15 min',
       },
       contouring: {
         name: 'Contouring',
