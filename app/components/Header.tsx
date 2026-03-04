@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { languages, Language } from '@/app/i18n';
@@ -56,6 +57,9 @@ export default function Header() {
 
 
 
+  const pathname = usePathname();
+  const router = useRouter();
+
   const navItems = [
     { href: '#about', label: t.nav.about },
     { href: '#gallery', label: t.nav.gallery },
@@ -68,6 +72,13 @@ export default function Header() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsMenuOpen(false);
+
+    // If not on the homepage, route back to homepage with hash
+    if (pathname !== '/') {
+      router.push('/' + href);
+      return;
+    }
+
     const element = document.querySelector(href);
     if (element) {
       const headerOffset = 80;

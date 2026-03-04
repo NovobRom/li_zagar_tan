@@ -25,42 +25,51 @@ const metadataByLanguage = {
     description: 'Profesionalus purškiamas įdegis (spray tan) Vilniuje. Saugus, natūralus rezultatas per 30 minučių. Efektas išlieka 7-10 dienų. Registracija per Treatwell.',
     keywords: 'purškiamas įdegis, spray tan, Vilnius, li_zagar_tan, li-zagar-tan, lizagartan, лизагартан, ли загар тан',
     openGraph: {
+      title: 'li_zagar_tan | Purškiamas įdegis Vilniuje',
       description: 'Aukščiausios kokybės purškiamas įdegis Vilniuje. Saugus, natūralus rezultatas per 20 minučių. Užsiregistruokite šiandien!',
-      openGraph: {
-        title: 'li_zagar_tan | Purškiamas įdegis Vilniuje',
-        description: 'Aukščiausios kokybės purškiamas įdegis Vilniuje. Saugus, natūralus rezultatas per 20 minučių. Užsiregistruokite šiandien!',
-        locale: 'lt_LT',
-        type: 'website',
-        images: [{ url: '/opengraph-image.png', width: 1200, height: 630 }],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: 'li_zagar_tan | Purškiamas įdegis Vilniuje',
-        description: 'Aukščiausios kokybės purškiamas įdegis Vilniuje. Saugus, natūralus rezultatas per 20 minučių. Užsiregistruokite šiandien!',
-        images: ['/opengraph-image.png'],
-      },
+      locale: 'lt_LT',
+      type: 'website',
+      images: [{ url: '/opengraph-image.png', width: 1200, height: 630 }],
     },
-    ru: {
+    twitter: {
+      card: 'summary_large_image',
+      title: 'li_zagar_tan | Purškiamas įdegis Vilniuje',
+      description: 'Aukščiausios kokybės purškiamas įdegis Vilniuje. Saugus, natūralus rezultatas per 20 minučių. Užsiregistruokite šiandien!',
+      images: ['/opengraph-image.png'],
+    },
+  },
+  ru: {
+    title: 'li_zagar_tan | Моментальный загар в Вильнюсе',
+    description: 'Моментальный эко-загар премиум качества в Вильнюсе. Безопасный и быстрый результат за 20 минут. Запишитесь сейчас!',
+    openGraph: {
       title: 'li_zagar_tan | Моментальный загар в Вильнюсе',
       description: 'Моментальный эко-загар премиум качества в Вильнюсе. Безопасный и быстрый результат за 20 минут. Запишитесь сейчас!',
-      openGraph: {
-        title: 'li_zagar_tan | Моментальный загар в Вильнюсе',
-        description: 'Моментальный эко-загар премиум качества в Вильнюсе. Безопасный и быстрый результат за 20 минут. Запишитесь сейчас!',
-        locale: 'ru_RU',
-        type: 'website',
-        images: [{ url: '/opengraph-image.png', width: 1200, height: 630 }],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: 'li_zagar_tan | Моментальный загар в Вильнюсе',
-        description: 'Моментальный эко-загар премиум качества в Вильнюсе. Безопасный и быстрый результат за 20 минут. Запишитесь сейчас!',
-        images: ['/opengraph-image.png'],
-      },
+      locale: 'ru_RU',
+      type: 'website',
+      images: [{ url: '/opengraph-image.png', width: 1200, height: 630 }],
     },
-    en: {
+    twitter: {
+      card: 'summary_large_image',
+      title: 'li_zagar_tan | Моментальный загар в Вильнюсе',
+      description: 'Моментальный эко-загар премиум качества в Вильнюсе. Безопасный и быстрый результат за 20 минут. Запишитесь сейчас!',
+      images: ['/opengraph-image.png'],
+    },
+  },
+  en: {
+    title: 'li_zagar_tan | Spray Tan in Vilnius',
+    description: 'Professional spray tan in Vilnius. Safe, natural result in 30 minutes.',
+    openGraph: {
+      title: 'li_zagar_tan | Spray Tan in Vilnius',
+      description: 'Professional spray tan in Vilnius. Safe, natural result in 30 minutes.',
+      locale: 'en_US',
+      type: 'website',
+      images: [{ url: '/opengraph-image.png', width: 1200, height: 630 }],
+    },
+    twitter: {
       card: 'summary_large_image',
       title: 'li_zagar_tan | Spray Tan in Vilnius',
       description: 'Professional spray tan in Vilnius. Safe, natural result in 30 minutes.',
+      images: ['/opengraph-image.png'],
     },
   },
 };

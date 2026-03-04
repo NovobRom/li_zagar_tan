@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { useLanguage } from '@/app/context/LanguageContext';
 
 const CONSENT_KEY = 'cookie-consent';
@@ -34,6 +35,16 @@ export default function CookieConsent() {
     const { t } = useLanguage();
     const { consent, accept, decline } = useCookieConsent();
     const [visible, setVisible] = useState(false);
+    const pathname = usePathname();
+    const router = useRouter();
+
+    const handleChoice = (action: () => void) => {
+        action();
+        setVisible(false);
+        if (pathname === '/privacy') {
+            router.push('/');
+        }
+    };
 
     useEffect(() => {
         // Show banner only if no decision has been made yet
@@ -61,19 +72,13 @@ export default function CookieConsent() {
                         </p>
                         <div className="flex items-center gap-3 flex-shrink-0">
                             <button
-                                onClick={() => {
-                                    decline();
-                                    setVisible(false);
-                                }}
+                                onClick={() => handleChoice(decline)}
                                 className="px-4 py-2 text-sm text-gray-400 hover:text-white border border-gray-600 hover:border-gray-400 rounded-lg transition-colors"
                             >
                                 {t.cookieConsent.decline}
                             </button>
                             <button
-                                onClick={() => {
-                                    accept();
-                                    setVisible(false);
-                                }}
+                                onClick={() => handleChoice(accept)}
                                 className="px-4 py-2 text-sm text-gray-900 font-medium bg-[#fbbf5d] hover:bg-amber-400 rounded-lg transition-colors"
                             >
                                 {t.cookieConsent.accept}
