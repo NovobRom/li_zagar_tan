@@ -93,12 +93,18 @@ export default function Header() {
 
   return (
     <>
-      <a
-        href="#main-content"
+      <button
+        onClick={() => {
+          const main = document.getElementById('main-content');
+          if (main) {
+            main.focus();
+            main.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-amber-600 focus:text-white focus:rounded-md focus:shadow-lg focus:outline-none"
       >
         Skip to main content
-      </a>
+      </button>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-white/90 backdrop-blur-md shadow-sm'
           }`}
