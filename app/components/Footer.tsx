@@ -74,8 +74,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-8 pt-6 flex flex-col items-center gap-2 text-center text-gray-400 text-xs sm:text-sm">
+        <div className="pt-8 border-t border-brand-accent/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-brand-dark/60">
           <p>© {currentYear} {t.footer.brand}. {t.footer.rights}.</p>
+          <a href="/privacy" className="hover:text-brand-accent transition-colors">
+            {t.footer.privacy}
+          </a>
           <p>Made by Roman Novobranets</p>
         </div>
       </div>

@@ -84,6 +84,7 @@ export interface Translations {
     rights: string;
     workingHours: string;
     byAppointment: string;
+    privacy: string;
   };
   about: {
     title: string;
@@ -127,5 +128,14 @@ export interface Translations {
     message: string;
     accept: string;
     decline: string;
+    privacyLink: string;
+  };
+  privacyPolicy: {
+    title: string;
+    lastUpdated: string;
+    sections: {
+      title: string;
+      content: string;
+    }[];
   };
 }

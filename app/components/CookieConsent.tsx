@@ -80,6 +80,11 @@ export default function CookieConsent() {
                             </button>
                         </div>
                     </div>
+                    <div className="mt-2 text-xs md:text-center text-gray-400">
+                        <a href="/privacy" className="hover:text-white transition-colors underline underline-offset-2">
+                            {t.cookieConsent.privacyLink}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -120,6 +120,7 @@ export const lt: Translations = {
     rights: 'Visos teisės saugomos',
     workingHours: 'Darbo laikas',
     byAppointment: 'Pagal išankstinę registraciją',
+    privacy: 'Privatumo politika',
   },
 
   // About Section
@@ -213,5 +214,30 @@ export const lt: Translations = {
     message: 'Šioje svetainėje naudojami slapukai, kad galėtume analizuoti lankymąsi ir pagerinti jūsų patirtį.',
     accept: 'Sutinku',
     decline: 'Nesutinku',
+    privacyLink: 'Plačiau',
+  },
+
+  // Privacy Policy
+  privacyPolicy: {
+    title: 'Privatumo politika',
+    lastUpdated: 'Paskutinį kartą atnaujinta: 2026 m. kovo 4 d.',
+    sections: [
+      {
+        title: '1. Informacijos rinkimas',
+        content: 'Svetainėje renkami analitiniai duomenys (pvz., naršyklės tipas, apsilankymo trukmė) siekiant pagerinti vartotojų patirtį, taip pat jūsų savanoriškai pateikta informacija susisiekiant.',
+      },
+      {
+        title: '2. Slapukų naudojimas',
+        content: 'Naudojame „Google Analytics“ slapukus lankomumo statistikai vertinti. Šie slapukai įrašomi tik gavus jūsų sutikimą.',
+      },
+      {
+        title: '3. Duomenų saugojimas ir trečiosios šalys',
+        content: 'Jūsų informacija nėra parduodama trečiosioms šalims. Analitiniai duomenys tvarkomi per „Google Analytics“ sistemą laikantis BDAR normų.',
+      },
+      {
+        title: '4. Jūsų teisės',
+        content: 'Jūs turite teisę bet kada prašyti susipažinti su jūsų duomenimis, juos ištrinti arba atšaukti sutikimą naudoti slapukus.',
+      },
+    ],
   },
 };

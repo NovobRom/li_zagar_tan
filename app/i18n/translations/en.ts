@@ -120,6 +120,7 @@ export const en: Translations = {
     rights: 'All rights reserved',
     workingHours: 'Working Hours',
     byAppointment: 'By appointment only',
+    privacy: 'Privacy Policy',
   },
 
   // About Section
@@ -213,5 +214,30 @@ export const en: Translations = {
     message: 'This website uses cookies to analyze traffic and improve your experience.',
     accept: 'Accept',
     decline: 'Decline',
+    privacyLink: 'Learn more',
+  },
+
+  // Privacy Policy
+  privacyPolicy: {
+    title: 'Privacy Policy',
+    lastUpdated: 'Last updated: March 4, 2026',
+    sections: [
+      {
+        title: '1. Information Collection',
+        content: 'We collect analytical data (e.g., browser type, visit duration) to improve user experience, as well as information you voluntarily provide when contacting us.',
+      },
+      {
+        title: '2. Use of Cookies',
+        content: 'We use Google Analytics cookies to measure site traffic. These cookies are only loaded after your explicit consent.',
+      },
+      {
+        title: '3. Data Storage and Third Parties',
+        content: 'Your information is not sold to third parties. We use Google Analytics, which processes data in accordance with GDPR regulations.',
+      },
+      {
+        title: '4. Your Rights',
+        content: 'You have the right to request deletion of your data and to withdraw your consent for cookie usage at any time by clearing your browser\'s local storage.',
+      },
+    ],
   },
 };
