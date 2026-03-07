@@ -6,6 +6,7 @@ import StructuredData from './components/StructuredData';
 import Script from 'next/script';
 import CookieConsent from './components/CookieConsent';
 import GoogleAnalyticsWrapper from './components/GoogleAnalyticsWrapper';
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -137,6 +138,7 @@ export default async function RootLayout({
             `}
           </Script>
         )}
+        <Analytics />
       </body>
     </html>
   );
