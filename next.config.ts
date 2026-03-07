@@ -1,11 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  turbopack: {
-    resolveAlias: {
-      '@vercel/analytics/react': '@vercel/analytics/dist/react/index.mjs',
-    },
-  },
   experimental: {
     serverActions: {
       bodySizeLimit: '10mb',
