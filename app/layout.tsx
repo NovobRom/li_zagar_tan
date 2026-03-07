@@ -6,7 +6,7 @@ import StructuredData from './components/StructuredData';
 import Script from 'next/script';
 import CookieConsent from './components/CookieConsent';
 import GoogleAnalyticsWrapper from './components/GoogleAnalyticsWrapper';
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
