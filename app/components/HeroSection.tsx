@@ -2,6 +2,7 @@
 
 import { Sparkles, Clock, Shield } from 'lucide-react';
 import { useLanguage } from '@/app/context/LanguageContext';
+import { formatRating } from '@/app/config/reviews';
 import Image from 'next/image';
 
 export default function HeroSection({ heroImageUrl }: { heroImageUrl: string | null }) {
@@ -86,7 +87,7 @@ export default function HeroSection({ heroImageUrl }: { heroImageUrl: string | n
                 </a>
                 <p className="text-sm text-gray-600 flex items-center justify-center lg:justify-start gap-2">
                   <span className="text-[#fbbf5d]">★★★★★</span>
-                  <span className="text-xs sm:text-sm">{t.common.rating}</span>
+                  <span className="text-xs sm:text-sm">{formatRating(t.common.rating)}</span>
                 </p>
               </div>
 

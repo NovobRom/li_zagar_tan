@@ -19,7 +19,7 @@ export const ru: Translations = {
     learnMore: 'Подробнее',
     address: 'A. Goštauto g. 8-211, Vilnius',
     instagram: '@li_zagar_tan',
-    rating: '4.9 ★ из 73 отзывов',
+    rating: '{rating} ★ из {count} отзывов',
     fullBody: 'Всё тело',
     legsOnly: 'Только ноги',
     minutes: 'мин',

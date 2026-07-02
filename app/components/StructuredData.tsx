@@ -1,5 +1,7 @@
 'use client';
 
+import { TREATWELL_RATING, TREATWELL_REVIEW_COUNT_SCHEMA } from '@/app/config/reviews';
+
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://li-zagar-tan.vercel.app';
 
 export default function StructuredData() {
@@ -45,8 +47,8 @@ export default function StructuredData() {
         'priceRange': '€€',
         'aggregateRating': {
             '@type': 'AggregateRating',
-            'ratingValue': '4.9',
-            'reviewCount': '73'
+            'ratingValue': TREATWELL_RATING,
+            'reviewCount': TREATWELL_REVIEW_COUNT_SCHEMA
         }
     };
 
