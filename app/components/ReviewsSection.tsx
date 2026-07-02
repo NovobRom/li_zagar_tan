@@ -2,6 +2,7 @@
 
 import { Star } from 'lucide-react';
 import { useLanguage } from '@/app/context/LanguageContext';
+import { formatRating } from '@/app/config/reviews';
 
 export default function ReviewsSection() {
   const { t } = useLanguage();
@@ -25,7 +26,7 @@ export default function ReviewsSection() {
               ))}
             </div>
             <span className="text-sm sm:text-base font-semibold text-gray-700">
-              {t.common.rating}
+              {formatRating(t.common.rating)}
             </span>
           </div>
         </div>

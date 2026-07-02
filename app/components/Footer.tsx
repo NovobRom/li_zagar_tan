@@ -2,6 +2,7 @@
 
 import { MapPin, Instagram, Clock } from 'lucide-react';
 import { useLanguage } from '@/app/context/LanguageContext';
+import { formatRating } from '@/app/config/reviews';
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -16,7 +17,7 @@ export default function Footer() {
             <h4 className="text-base sm:text-lg font-semibold text-white mb-3">{t.footer.tagline}</h4>
             <div className="flex items-center justify-center sm:justify-start gap-2 text-gray-400 text-sm">
               <span className="text-[#fbbf5d]">★★★★★</span>
-              <span>{t.common.rating}</span>
+              <span>{formatRating(t.common.rating)}</span>
             </div>
           </div>
 

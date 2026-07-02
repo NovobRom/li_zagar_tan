@@ -2,6 +2,7 @@
 
 import { Sparkles } from 'lucide-react';
 import { useLanguage } from '@/app/context/LanguageContext';
+import { TREATWELL_RATING, TREATWELL_REVIEW_COUNT } from '@/app/config/reviews';
 import TreatwellWidget from './TreatwellWidget';
 
 export default function BookingSection() {
@@ -47,13 +48,13 @@ export default function BookingSection() {
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-            <span>73+ {t.common.rating.split(' ').pop()}</span>
+            <span>{TREATWELL_REVIEW_COUNT} {t.common.rating.split(' ').pop()}</span>
           </div>
           <div className="flex items-center gap-2">
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-            <span>4.9★</span>
+            <span>{TREATWELL_RATING}★</span>
           </div>
         </div>
       </div>
