@@ -1,0 +1,34 @@
+schema: spec-driven
+
+context: |
+  Project: li_zagar_tan — marketing landing site for a spray-tan salon in Vilnius
+  (production: https://www.lizagartan.com). Bookings go through Treatwell; the
+  site's job is SEO visibility, trust (reviews, gallery) and conversion to the
+  Treatwell booking widget.
+
+  Tech stack: Next.js 16 (App Router, Turbopack), React 19, TypeScript (strict),
+  Tailwind CSS 4, Supabase (auth for /admin, Postgres + Storage for gallery and
+  site settings), Zod for validation, deployed on Vercel.
+
+  Structure: app/ holds everything — components/ (landing sections, admin UI),
+  actions/ (server actions: auth, gallery, settings, audit), lib/ (supabase
+  clients, validation, security), i18n/ (typed translations lt/ru/en, default lt,
+  client-side LanguageContext + cookie), config/ (display constants like
+  Treatwell rating).
+
+  Conventions:
+  - Server actions return the ActionResult discriminated union from app/lib/actions.ts
+  - Admin mutations must check Supabase auth + is_admin RPC and log via logAction
+  - Display constants (rating, review count) live in app/config/, not inline
+  - Translations are typed via app/i18n/types.ts; every user-facing string needs
+    all three languages (lt, ru, en)
+  - Docs: reports for the owner are Russian, technical docs are English
+
+rules:
+  proposal:
+    - Keep proposals under 400 words
+    - Always include a "Non-goals" section
+  tasks:
+    - Tasks must be atomic (one file or one concern each, max ~1 hour)
+    - Every task that changes user-visible text must include updating all three locales
+    - End each task list with a verification task (build + manual check)
